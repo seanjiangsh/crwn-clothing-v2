@@ -1,6 +1,6 @@
 import { Category } from "../../types/common";
 
-import "./Directory.scss";
+import "./Directory.css";
 import CategoryItem from "../category-item/Category-item";
 
 type DirectoryProps = { categories: Array<Category> };

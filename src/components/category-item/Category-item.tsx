@@ -1,6 +1,6 @@
 import { Category } from "../../types/common";
 
-import "./Category-item.scss";
+import "./Category-item.css";
 
 export default function CategoryItem(props: Category) {
   const { id, title, imageUrl } = props;
