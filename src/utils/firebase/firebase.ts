@@ -1,10 +1,10 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
   UserCredential,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -30,17 +30,28 @@ provider.setCustomParameters({ prompt: "select_account" });
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
+export const createAuthUserWithEmailAndPassword = async (
+  email: string,
+  password: string,
+) => {
+  const userCred = await createUserWithEmailAndPassword(auth, email, password);
+  return userCred;
+};
+
 // * firestore
 export const db = getFirestore();
-export const createUserDocumentFromAuth = async (userCred: UserCredential) => {
-  const { uid, displayName, email } = userCred.user;
+export const createUserDocumentFromAuth = async (
+  userCred: UserCredential,
+  additionalInfo: any = {},
+) => {
+  const { uid, email } = userCred.user;
   const userDocRef = doc(db, "users", uid);
   const userSnapshot = await getDoc(userDocRef);
   const hasUser = userSnapshot.exists();
   if (!hasUser) {
     try {
       const createdAt = new Date();
-      await setDoc(userDocRef, { displayName, email, createdAt });
+      await setDoc(userDocRef, { ...additionalInfo, email, createdAt });
     } catch (err) {
       console.warn(err);
     }
