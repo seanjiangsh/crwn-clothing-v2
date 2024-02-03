@@ -1,9 +1,9 @@
-import { Category } from "../../types/common";
+import { CategoryProps } from "../../types/common";
 
 import Directory from "../../components/directory/Directory";
 
 export default function Home() {
-  const categories: Array<Category> = [
+  const categories: Array<CategoryProps> = [
     {
       id: 1,
       title: "hats",
