@@ -3,10 +3,12 @@ import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
-  UserCredential,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
+  User,
+  NextFn,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -51,10 +53,10 @@ export const signInAuthUserWithEmailAndPassword = async (
 // * firestore
 export const db = getFirestore();
 export const createUserDocumentFromAuth = async (
-  userCred: UserCredential,
+  user: User,
   additionalInfo: any = {},
 ) => {
-  const { uid, email } = userCred.user;
+  const { uid, email } = user;
   const userDocRef = doc(db, "users", uid);
   const userSnapshot = await getDoc(userDocRef);
   const hasUser = userSnapshot.exists();
@@ -70,3 +72,7 @@ export const createUserDocumentFromAuth = async (
 };
 
 export const signOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (
+  nextOrObserver: NextFn<User | null>,
+) => onAuthStateChanged(auth, nextOrObserver);

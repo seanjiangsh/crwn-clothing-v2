@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { AuthError } from "firebase/auth";
 
 import {
@@ -8,7 +8,6 @@ import {
 
 import "./Sign-up.css";
 
-import { UserContext } from "../../../contexts/user";
 import FormInput from "../../../components/form-input/FromInput";
 import Button from "../../../components/button/Button";
 
@@ -26,8 +25,6 @@ const defaultFromFields: FormFields = {
 };
 
 export default function SignUp() {
-  const { setUserState } = useContext(UserContext);
-
   const [formFields, setFormFields] = useState(defaultFromFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
@@ -50,9 +47,8 @@ export default function SignUp() {
     ev.preventDefault();
     try {
       const args = [email, password] as const;
-      const cred = await createAuthUserWithEmailAndPassword(...args);
-      await createUserDocumentFromAuth(cred, { displayName });
-      setUserState({ user: cred.user });
+      const { user } = await createAuthUserWithEmailAndPassword(...args);
+      await createUserDocumentFromAuth(user, { displayName });
     } catch (error) {
       const err = error as AuthError;
       const msg = `Failed to create new user: ${err.code}`;

@@ -1,15 +1,13 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { AuthError } from "firebase/auth";
 
 import {
   signInWithGooglePopup,
-  createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "../../../utils/firebase/firebase";
 
 import "./Sign-in.css";
 
-import { UserContext } from "../../../contexts/user";
 import FormInput from "../../../components/form-input/FromInput";
 import Button from "../../../components/button/Button";
 
@@ -17,25 +15,19 @@ type FormFields = { email: string; password: string };
 const defaultFromFields: FormFields = { email: "", password: "" };
 
 export default function SignIn() {
-  const { setUserState } = useContext(UserContext);
-
   const [formFields, setFormFields] = useState(defaultFromFields);
   const { email, password } = formFields;
 
   const disableSubmit = !email || !password;
 
   const googleSignIn = async () => {
-    const cred = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(cred);
-    setUserState({ user: cred.user });
+    await signInWithGooglePopup();
   };
 
   const onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     try {
-      const result = await signInAuthUserWithEmailAndPassword(email, password);
-      const { user } = result;
-      setUserState({ user });
+      await signInAuthUserWithEmailAndPassword(email, password);
     } catch (error) {
       const err = error as AuthError;
       alert("Login failed, please try again");
