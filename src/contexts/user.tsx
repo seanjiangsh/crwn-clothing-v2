@@ -20,7 +20,7 @@ type Context = {
   setUserState: Dispatch<SetStateAction<UserState>>;
 };
 
-const defaultUserState = { user: null };
+const defaultUserState: UserState = { user: null };
 const defaultContext: Context = {
   userState: defaultUserState,
   setUserState: () => {},
