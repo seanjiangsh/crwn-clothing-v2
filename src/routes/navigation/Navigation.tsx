@@ -1,14 +1,19 @@
 import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 
+import { UserContext } from "../../contexts/user";
+import { CartContext } from "../../contexts/cart";
+
+import { signOutUser } from "../../utils/firebase/firebase";
+
 import "./Navigation.css";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
-
-import { UserContext } from "../../contexts/user";
-import { signOutUser } from "../../utils/firebase/firebase";
+import CartIcon from "../../components/cart/icon/Icon";
+import CartDropDown from "../../components/cart/drop-down/DropDown";
 
 export default function Navigation() {
   const { userState } = useContext(UserContext);
+  const { cartState } = useContext(CartContext);
 
   return (
     <React.Fragment>
@@ -29,7 +34,9 @@ export default function Navigation() {
               SIGN IN
             </Link>
           )}
+          <CartIcon />
         </div>
+        {cartState.opened && <CartDropDown />}
       </div>
       <Outlet />
     </React.Fragment>
