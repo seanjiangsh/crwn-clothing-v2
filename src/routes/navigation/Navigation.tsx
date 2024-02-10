@@ -12,8 +12,8 @@ import CartIcon from "../../components/cart/icon/Icon";
 import CartDropDown from "../../components/cart/drop-down/DropDown";
 
 export default function Navigation() {
-  const { userState } = useContext(UserContext);
-  const { cartState } = useContext(CartContext);
+  const { user } = useContext(UserContext);
+  const { opened } = useContext(CartContext);
 
   return (
     <React.Fragment>
@@ -25,7 +25,7 @@ export default function Navigation() {
           <Link className="nav-link" to="/shop">
             SHOP
           </Link>
-          {userState?.user ? (
+          {user ? (
             <span className="nav-link" onClick={signOutUser}>
               SIGN OUT
             </span>
@@ -36,7 +36,7 @@ export default function Navigation() {
           )}
           <CartIcon />
         </div>
-        {cartState.opened && <CartDropDown />}
+        {opened && <CartDropDown />}
       </div>
       <Outlet />
     </React.Fragment>

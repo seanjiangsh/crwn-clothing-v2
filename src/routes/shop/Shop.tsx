@@ -6,8 +6,7 @@ import "./Shop.css";
 import ProductCard from "../../components/product/card/Product-card";
 
 export default function Shop() {
-  const { productState } = useContext(ProductContext);
-  const { products } = productState;
+  const { products } = useContext(ProductContext);
 
   return (
     <div className="products-container">

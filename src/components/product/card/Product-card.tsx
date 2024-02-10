@@ -1,15 +1,14 @@
+import { useContext } from "react";
+
+import { CartContext } from "../../../contexts/cart";
+import { Product } from "../../../types/common";
+
 import "./Product-card.css";
 import Button from "../../button/Button";
 
-type ProductCardProps = {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-};
-
-export default function ProductCard(props: ProductCardProps) {
+export default function ProductCard(props: Product) {
   const { name, imageUrl, price } = props;
+  const { addItem } = useContext(CartContext);
 
   return (
     <div className="product-card-container">
@@ -18,7 +17,9 @@ export default function ProductCard(props: ProductCardProps) {
         <span className="name">{name} </span>
         <span className="price">{price}</span>
       </div>
-      <Button buttonType="inverted">Add to cart</Button>
+      <Button buttonType="inverted" onClick={() => addItem(props)}>
+        Add to cart
+      </Button>
     </div>
   );
 }

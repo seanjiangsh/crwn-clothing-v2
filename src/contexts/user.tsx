@@ -12,30 +12,26 @@ import {
   onAuthStateChangedListener,
 } from "../utils/firebase/firebase";
 
-type UserState = {
-  user: User | null;
-};
 type Context = {
-  userState: UserState;
-  setUserState: Dispatch<SetStateAction<UserState>>;
+  user: User | null;
+  setUser: Dispatch<SetStateAction<User | null>>;
 };
 
-const defaultUserState: UserState = { user: null };
 const defaultContext: Context = {
-  userState: defaultUserState,
-  setUserState: () => {},
+  user: null,
+  setUser: () => {},
 };
 export const UserContext = createContext<Context>(defaultContext);
 
 type ProviderProps = { children: JSX.Element };
 export const UserProvider = ({ children }: ProviderProps) => {
-  const [userState, setUserState] = useState<UserState>(defaultUserState);
-  const value = { userState, setUserState };
+  const [user, setUser] = useState<Context["user"]>(null);
+  const value = { user, setUser };
 
   useEffect(() => {
     const nextFn = (user: User | null) => {
       if (user) createUserDocumentFromAuth(user);
-      setUserState({ user });
+      setUser(user);
     };
     const unsubscribe = onAuthStateChangedListener(nextFn);
     return unsubscribe;

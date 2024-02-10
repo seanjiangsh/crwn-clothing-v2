@@ -6,10 +6,9 @@ import "./Icon.css";
 import { ReactComponent as ShoppingIcon } from "../../../assets/shopping-bag.svg";
 
 export default function Icon() {
-  const { cartState, setCartState } = useContext(CartContext);
-  const { opened } = cartState;
+  const { opened, setOpened } = useContext(CartContext);
 
-  const onClick = () => setCartState({ opened: !opened });
+  const onClick = () => setOpened(!opened);
 
   return (
     <div className="cart-icon-container" onClick={onClick}>
