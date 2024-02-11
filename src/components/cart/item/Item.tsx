@@ -1,14 +1,17 @@
+import * as cartContext from "../../../contexts/cart";
+
 import "./Item.css";
 
-type ItemProps = { name: string; quantity: number };
-
-export default function Item(props: ItemProps) {
-  const { name, quantity } = props;
+export default function Item(props: cartContext.Item) {
+  const { name, imageUrl, price, quantity } = props;
 
   return (
-    <div className="cart-icon-container">
-      <h2>{name}</h2>
-      <span>{quantity}</span>
+    <div className="cart-item-container">
+      <img src={imageUrl} alt={name}></img>
+      <div className="item-details">
+        <span className="name">{name}</span>
+        <span className="price">{`${quantity} x ${price}`}</span>
+      </div>
     </div>
   );
 }

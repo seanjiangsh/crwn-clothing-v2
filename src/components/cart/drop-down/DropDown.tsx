@@ -11,7 +11,7 @@ export default function DropDown() {
 
   return (
     <div className="cart-dropdown-container">
-      <div className="cart-itms">
+      <div className="cart-items">
         {items.map((item) => (
           <Item key={item.id} {...item} />
         ))}
