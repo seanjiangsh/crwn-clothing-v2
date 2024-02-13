@@ -10,7 +10,17 @@ import {
   User,
   NextFn,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  getDocs,
+} from "firebase/firestore";
+
+import SHOP_DATA from "../../shop-data";
 
 // * Your web app's Firebase configuration
 // * For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -76,3 +86,24 @@ export const signOutUser = async () => await signOut(auth);
 export const onAuthStateChangedListener = (
   nextOrObserver: NextFn<User | null>,
 ) => onAuthStateChanged(auth, nextOrObserver);
+
+export const addCollectionAndDocuments = async (
+  collectionKey: string,
+  data: typeof SHOP_DATA,
+) => {
+  const collectionRef = collection(db, collectionKey);
+  const collectionSnapshot = await getDocs(collectionRef);
+  if (!collectionSnapshot.empty) {
+    console.log("has category collections");
+    return;
+  }
+
+  const batch = writeBatch(db);
+  data.forEach((category) => {
+    const { title } = category;
+    const docRef = doc(collectionRef, title.toLowerCase());
+    batch.set(docRef, category);
+  });
+  await batch.commit();
+  console.log("new category collections added");
+};
