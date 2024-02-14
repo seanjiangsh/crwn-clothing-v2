@@ -18,9 +18,11 @@ import {
   collection,
   writeBatch,
   getDocs,
+  query,
 } from "firebase/firestore";
 
 import SHOP_DATA from "../../shop-data";
+import { CategoryMap } from "../../types/common";
 
 // * Your web app's Firebase configuration
 // * For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -87,11 +89,10 @@ export const onAuthStateChangedListener = (
   nextOrObserver: NextFn<User | null>,
 ) => onAuthStateChanged(auth, nextOrObserver);
 
-export const addCollectionAndDocuments = async (
-  collectionKey: string,
-  data: typeof SHOP_DATA,
-) => {
-  const collectionRef = collection(db, collectionKey);
+const COLLECTION_KEY = "categories";
+
+export const addCollectionAndDocuments = async (data: typeof SHOP_DATA) => {
+  const collectionRef = collection(db, COLLECTION_KEY);
   const collectionSnapshot = await getDocs(collectionRef);
   if (!collectionSnapshot.empty) {
     console.log("has category collections");
@@ -106,4 +107,17 @@ export const addCollectionAndDocuments = async (
   });
   await batch.commit();
   console.log("new category collections added");
+};
+
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, COLLECTION_KEY);
+  const q = query(collectionRef);
+  const querySnapshot = await getDocs(q);
+  const categories = querySnapshot.docs;
+  const categoryMap = categories.reduce<CategoryMap>((p, c) => {
+    const { title, items } = c.data();
+    p[title.toLowerCase()] = items;
+    return p;
+  }, {});
+  return categoryMap;
 };

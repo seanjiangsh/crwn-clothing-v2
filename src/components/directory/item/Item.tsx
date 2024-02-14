@@ -1,17 +1,17 @@
-import { CategoryProps } from "../../types/common";
+import { Category } from "../../../types/common";
 
-import "./Category-item.css";
+import "./Item.css";
 
-export default function CategoryItem(props: CategoryProps) {
+export default function DirectoryItem(props: Category) {
   const { id, title, imageUrl } = props;
 
   return (
-    <div key={id} className="category-container">
+    <div key={id} className="directory-item-container">
       <div
         className="background-image"
         style={{ backgroundImage: `url(${imageUrl})` }}
       />
-      <div className="category-body-container">
+      <div className="body">
         <h2>{title}</h2>
         <p>Shop Now</p>
       </div>
