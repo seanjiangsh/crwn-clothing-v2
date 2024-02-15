@@ -5,8 +5,8 @@ import { CategoriesContext } from "../../../contexts/categories";
 
 import { Product } from "../../../types/common";
 
-import "./Category.css";
 import ProductCard from "../../../components/product/card/Product-card";
+import { CategoryTitle, CategoryContainer } from "./Category.styles";
 
 export default function Category() {
   const { category } = useParams();
@@ -22,10 +22,10 @@ export default function Category() {
 
   return (
     <React.Fragment>
-      <h2 className="category-title">{category?.toUpperCase() || ""}</h2>
-      <div className="category-container">
+      <CategoryTitle>{category?.toUpperCase() || ""}</CategoryTitle>
+      <CategoryContainer>
         {products && products.map((p) => <ProductCard key={p.id} {...p} />)}
-      </div>
+      </CategoryContainer>
     </React.Fragment>
   );
 }

@@ -1,12 +1,12 @@
-import "./authentication.css";
 import SignIn from "./sign-in/Sign-in";
 import SignUp from "./sign-up/Sign-up";
+import { AuthenticationContainer } from "./Authentication.styles";
 
 export default function Authentication() {
   return (
-    <div className="authentication-container">
+    <AuthenticationContainer>
       <SignIn />
       <SignUp />
-    </div>
+    </AuthenticationContainer>
   );
 }

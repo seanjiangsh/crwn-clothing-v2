@@ -6,10 +6,9 @@ import {
   createUserDocumentFromAuth,
 } from "../../../utils/firebase/firebase";
 
-import "./Sign-up.css";
-
 import FormInput from "../../../components/form-input/FromInput";
 import Button from "../../../components/button/Button";
+import { SignUpContainer } from "./Sign-up.styles";
 
 type FormFields = {
   displayName: string;
@@ -57,7 +56,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className="sign-up-container">
+    <SignUpContainer>
       <h2>I do not have an account</h2>
       <span>Sign up with your email and passrowd</span>
       <form onSubmit={onSubmit}>
@@ -97,6 +96,6 @@ export default function SignUp() {
           Submit
         </Button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 }
