@@ -17,8 +17,8 @@ import {
 } from "./Navigation.styles";
 
 export default function Navigation() {
-  const { user } = useContext(UserContext);
-  const { opened } = useContext(CartContext);
+  const { userState } = useContext(UserContext);
+  const { cartState } = useContext(CartContext);
 
   return (
     <React.Fragment>
@@ -28,7 +28,7 @@ export default function Navigation() {
         </LogoContainer>
         <NavLinks>
           <NavLink to="/shop">SHOP</NavLink>
-          {user ? (
+          {userState.user ? (
             <NavLink as="span" onClick={signOutUser}>
               SIGN OUT
             </NavLink>
@@ -37,7 +37,7 @@ export default function Navigation() {
           )}
           <CartIcon />
         </NavLinks>
-        {opened && <CartDropDown />}
+        {cartState.opened && <CartDropDown />}
       </NavigationContainer>
       <Outlet />
     </React.Fragment>

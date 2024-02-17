@@ -13,7 +13,8 @@ import {
 
 export default function DropDown() {
   const navigate = useNavigate();
-  const { items } = useContext(CartContext);
+  const { cartState } = useContext(CartContext);
+  const { items } = cartState;
 
   const onClick = () => navigate("/checkout");
 

@@ -11,7 +11,8 @@ import {
 } from "./Checkout.styles";
 
 export default function Checkout() {
-  const { items, totalPrice } = useContext(CartContext);
+  const { cartState } = useContext(CartContext);
+  const { items, totalPrice } = cartState;
 
   return (
     <CheckoutContainer>
