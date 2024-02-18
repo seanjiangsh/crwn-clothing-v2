@@ -1,9 +1,13 @@
-import { Category } from "../../types/common";
-
 import DirectoryItem from "./item/Item";
 import { DirectoryContainer } from "./Directory.styles";
 
-const categories: Array<Category & { route: string }> = [
+export type DirectoryCategory = {
+  id: number;
+  title: string;
+  imageUrl: string;
+  route: string;
+};
+const categories: Array<DirectoryCategory> = [
   {
     id: 1,
     title: "hats",
