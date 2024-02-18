@@ -1,8 +1,8 @@
-import * as cartContext from "../../../contexts/cart";
+import { Item as CartItem } from "../../../redux/cart/types";
 
 import { CartItemContainer, ItemDetails, ItemText } from "./Item.styles";
 
-export default function Item(props: cartContext.Item) {
+export default function Item(props: CartItem) {
   const { name, imageUrl, price, quantity } = props;
 
   return (

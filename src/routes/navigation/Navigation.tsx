@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 
-import { UserContext } from "../../contexts/user";
-import { CartContext } from "../../contexts/cart";
+import { selectUser } from "../../redux/user/selectors";
+import { selectCart } from "../../redux/cart/selectors";
 
 import { signOutUser } from "../../utils/firebase/firebase";
 
@@ -17,8 +18,8 @@ import {
 } from "./Navigation.styles";
 
 export default function Navigation() {
-  const { userState } = useContext(UserContext);
-  const { cartState } = useContext(CartContext);
+  const user = useSelector(selectUser);
+  const { opened } = useSelector(selectCart);
 
   return (
     <React.Fragment>
@@ -28,7 +29,7 @@ export default function Navigation() {
         </LogoContainer>
         <NavLinks>
           <NavLink to="/shop">SHOP</NavLink>
-          {userState.user ? (
+          {user ? (
             <NavLink as="span" onClick={signOutUser}>
               SIGN OUT
             </NavLink>
@@ -37,7 +38,7 @@ export default function Navigation() {
           )}
           <CartIcon />
         </NavLinks>
-        {cartState.opened && <CartDropDown />}
+        {opened && <CartDropDown />}
       </NavigationContainer>
       <Outlet />
     </React.Fragment>
