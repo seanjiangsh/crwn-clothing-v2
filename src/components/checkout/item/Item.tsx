@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 
 import { Item as CartItem } from "../../../redux/cart/types";
-import { selectCart } from "../../../redux/cart/selectors";
+import { selectCartItems } from "../../../redux/cart/selectors";
 import {
   addCartItem,
   removeCartItem,
@@ -21,7 +21,7 @@ import {
 export default function Item(props: CartItem) {
   const { name, imageUrl, price, quantity } = props;
 
-  const { items } = useSelector(selectCart);
+  const items = useSelector(selectCartItems);
   const dispatch = useDispatch();
 
   const add = () => dispatch(addCartItem(items, props));

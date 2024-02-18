@@ -2,7 +2,7 @@ import { Reducer } from "redux";
 import { CategoryActions, CategoryState } from "./types";
 
 const initialState: CategoryState = {
-  categories: {},
+  categories: [],
 };
 
 export const categoryReducer: Reducer<CategoryState, CategoryActions> = (
@@ -11,7 +11,7 @@ export const categoryReducer: Reducer<CategoryState, CategoryActions> = (
 ) => {
   const { type, payload } = action;
   switch (type) {
-    case "SET_CATEGORIES":
+    case "category/SET_CATEGORIES":
       return { ...state, categories: payload };
     default:
       return state;

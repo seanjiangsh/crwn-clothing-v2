@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 
 import { selectUser } from "../../redux/user/selectors";
-import { selectCart } from "../../redux/cart/selectors";
+import { selectCartOpened } from "../../redux/cart/selectors";
 
 import { signOutUser } from "../../utils/firebase/firebase";
 
@@ -19,7 +19,7 @@ import {
 
 export default function Navigation() {
   const user = useSelector(selectUser);
-  const { opened } = useSelector(selectCart);
+  const opened = useSelector(selectCartOpened);
 
   return (
     <React.Fragment>

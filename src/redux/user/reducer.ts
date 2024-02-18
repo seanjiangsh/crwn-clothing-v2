@@ -10,7 +10,7 @@ export const userReducer: Reducer<UserState, UserActions> = (
 ) => {
   const { type, payload } = action;
   switch (type) {
-    case "SET_CURRENT_USER":
+    case "user/SET_CURRENT_USER":
       return { ...state, user: payload };
     default:
       return state;

@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
 
-import { selectCategories } from "../../../redux/categories/selectors";
+import { selectCategoriesMap } from "../../../redux/categories/selectors";
 
 import PreviewComponent from "../../../components/category/preview/Preview";
 
 export default function Preview() {
-  const categories = useSelector(selectCategories);
+  const categories = useSelector(selectCategoriesMap);
 
   return (
     <div className="products-container">

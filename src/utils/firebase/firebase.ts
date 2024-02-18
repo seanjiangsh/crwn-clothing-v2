@@ -22,7 +22,7 @@ import {
 } from "firebase/firestore";
 
 import SHOP_DATA from "../../shop-data";
-import { CategoryMap } from "../../types/common";
+import { Category } from "../../types/common";
 
 // * Your web app's Firebase configuration
 // * For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -109,15 +109,10 @@ export const addCollectionAndDocuments = async (data: typeof SHOP_DATA) => {
   console.log("new category collections added");
 };
 
-export const getCategoriesAndDocuments = async () => {
+export const getCategoriesAndDocuments = async (): Promise<Array<Category>> => {
   const collectionRef = collection(db, COLLECTION_KEY);
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
-  const categories = querySnapshot.docs;
-  const categoryMap = categories.reduce<CategoryMap>((p, c) => {
-    const { title, items } = c.data();
-    p[title.toLowerCase()] = items;
-    return p;
-  }, {});
-  return categoryMap;
+  const categories = querySnapshot.docs.map((d) => d.data() as Category);
+  return categories;
 };

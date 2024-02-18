@@ -1,8 +1,8 @@
-import { CategoryMap } from "../../types/common";
+import { Category } from "../../types/common";
 
-export type CategoryState = { categories: CategoryMap };
+export type CategoryState = { categories: Array<Category> };
 
 export type CategoryActions = {
-  type: "SET_CATEGORIES";
-  payload: CategoryMap;
+  type: "category/SET_CATEGORIES";
+  payload: Array<Category>;
 };

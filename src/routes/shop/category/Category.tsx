@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { selectCategories } from "../../../redux/categories/selectors";
+import { selectCategoriesMap } from "../../../redux/categories/selectors";
 
 import { Product } from "../../../types/common";
 
@@ -11,7 +11,7 @@ import { CategoryTitle, CategoryContainer } from "./Category.styles";
 
 export default function Category() {
   const { category } = useParams();
-  const categories = useSelector(selectCategories);
+  const categories = useSelector(selectCategoriesMap);
 
   const [products, setProducts] = useState<Array<Product>>([]);
 

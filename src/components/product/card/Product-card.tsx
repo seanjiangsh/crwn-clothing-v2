@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import { selectCart } from "../../../redux/cart/selectors";
+import { selectCartItems } from "../../../redux/cart/selectors";
 import { addCartItem } from "../../../redux/cart/actions";
 
 import { Product } from "../../../types/common";
@@ -16,7 +16,7 @@ import {
 export default function ProductCard(props: Product) {
   const { name, imageUrl, price } = props;
 
-  const { items } = useSelector(selectCart);
+  const items = useSelector(selectCartItems);
   const dispatch = useDispatch();
 
   const add = () => dispatch(addCartItem(items, props));
