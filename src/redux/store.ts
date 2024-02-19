@@ -18,10 +18,11 @@ const composeEnhancer =
   compose;
 const composeEnhancers = composeEnhancer(applyMiddleware(...middlewares));
 
+// * tmp fix
 const persistedReducer = persistReducer(
   { key: "root", storage, blacklist: ["user"] },
-  rootReducer as any, // tmp fix
-);
+  rootReducer as any,
+) as unknown as typeof rootReducer;
 
 export const store = createStore(persistedReducer, undefined, composeEnhancers);
 
