@@ -6,10 +6,12 @@ import {
 import logger from "redux-logger";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { thunk } from "redux-thunk";
 
 import { rootReducer } from "./root-reducer";
 
-const middlewares = import.meta.env.DEV ? [logger] : [];
+const middlewares = [thunk];
+if (import.meta.env.DEV) middlewares.push(logger);
 
 const composeEnhancer =
   (!import.meta.env.PROD &&
@@ -20,7 +22,7 @@ const composeEnhancers = composeEnhancer(applyMiddleware(...middlewares));
 
 // * tmp fix
 const persistedReducer = persistReducer(
-  { key: "root", storage, blacklist: ["user"] },
+  { key: "root", storage, whitelist: ["cart"] },
   rootReducer as any,
 ) as unknown as typeof rootReducer;
 

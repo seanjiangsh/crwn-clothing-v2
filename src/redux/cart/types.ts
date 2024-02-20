@@ -7,8 +7,8 @@ export type CartState = {
   items: Array<Item>;
 };
 
-export type OpenAction = { type: "cart/SET_OPENED" };
-export type ItemAction = {
+type OpenAction = { type: "cart/SET_OPENED" };
+type ItemAction = {
   type: "cart/SET_CART_ITEMS";
   payload: { items: Array<Item> };
 };
