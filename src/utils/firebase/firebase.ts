@@ -80,7 +80,7 @@ export const createUserDocumentFromAuth = async (
       console.warn(err);
     }
   }
-  return userDocRef;
+  return userSnapshot;
 };
 
 export const signOutUser = async () => await signOut(auth);
@@ -115,4 +115,14 @@ export const getCategoriesAndDocuments = async (): Promise<Array<Category>> => {
   const querySnapshot = await getDocs(q);
   const categories = querySnapshot.docs.map((d) => d.data() as Category);
   return categories;
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const nextFn = (user: User | null) => {
+      unsubscribe();
+      resolve(user);
+    };
+    const unsubscribe = onAuthStateChanged(auth, nextFn, reject);
+  });
 };

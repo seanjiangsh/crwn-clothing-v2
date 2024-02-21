@@ -6,16 +6,16 @@ export type CategoryState = {
   fetchCategoriesError: null | string;
 };
 
-type fetchCategoriesStartAction = { type: "category/FETCH_CATEGORIES_START" };
-type fetchCategoriesSuccessAction = {
+type FetchCategoriesStartAction = { type: "category/FETCH_CATEGORIES_START" };
+type FetchCategoriesSuccessAction = {
   type: "category/FETCH_CATEGORIES_SUCCESS";
   payload: Array<Category>;
 };
-type fetchCategoriesFailedAction = {
+type FetchCategoriesFailedAction = {
   type: "category/FETCH_CATEGORIES_FAILED";
   payload: CategoryState["fetchCategoriesError"];
 };
 export type CategoryActions =
-  | fetchCategoriesStartAction
-  | fetchCategoriesSuccessAction
-  | fetchCategoriesFailedAction;
+  | FetchCategoriesStartAction
+  | FetchCategoriesSuccessAction
+  | FetchCategoriesFailedAction;

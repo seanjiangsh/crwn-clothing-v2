@@ -6,11 +6,14 @@ import {
 import logger from "redux-logger";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { thunk } from "redux-thunk";
+import createSagaMiddleware from "redux-saga";
 
 import { rootReducer } from "./root-reducer";
+import { rootSaga } from "./root-saga";
 
-const middlewares = [thunk];
+const sagaMiddleware = createSagaMiddleware();
+
+const middlewares: Array<any> = [sagaMiddleware];
 if (import.meta.env.DEV) middlewares.push(logger);
 
 const composeEnhancer =
@@ -27,6 +30,8 @@ const persistedReducer = persistReducer(
 ) as unknown as typeof rootReducer;
 
 export const store = createStore(persistedReducer, undefined, composeEnhancers);
+
+sagaMiddleware.run(rootSaga);
 
 export const persister = persistStore(store);
 
