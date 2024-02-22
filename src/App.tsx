@@ -1,9 +1,13 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 
-import { addCollectionAndDocuments } from "./utils/firebase/firebase";
-import { checkUserSession } from "./redux/user/actions";
+import { useAppDispatch } from "./redux/root-hook";
+import { userActions } from "./redux/user/reducer";
+import {
+  addCollectionAndDocuments,
+  createUserDocumentFromAuth,
+  onAuthStateChangedListener,
+} from "./utils/firebase/firebase";
 import SHOP_DATA from "./shop-data";
 
 import Navigation from "./routes/navigation/Navigation";
@@ -13,10 +17,17 @@ import Checkout from "./routes/checkout/Checkout";
 import Authentication from "./routes/authentication/Authentication";
 
 export default function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(checkUserSession());
+    const unsubscribe = onAuthStateChangedListener((user) => {
+      if (user) {
+        createUserDocumentFromAuth(user);
+      }
+      dispatch(userActions.setCurrentUser(user));
+    });
+
+    return unsubscribe;
   }, [dispatch]);
 
   useEffect(() => {

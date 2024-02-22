@@ -1,3 +1,4 @@
+import { PayloadAction } from "@reduxjs/toolkit";
 import { Product } from "../../types/common";
 
 export type Item = Product & { quantity: number };
@@ -7,9 +8,4 @@ export type CartState = {
   items: Array<Item>;
 };
 
-type OpenAction = { type: "cart/SET_OPENED" };
-type ItemAction = {
-  type: "cart/SET_CART_ITEMS";
-  payload: { items: Array<Item> };
-};
-export type CartActions = OpenAction | ItemAction;
+export type SetItemAction = PayloadAction<Product>;
