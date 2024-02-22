@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { AuthError } from "firebase/auth";
 
-import { signUpStart } from "../../../redux/user/actions";
+import {
+  createAuthUserWithEmailAndPassword,
+  createUserDocumentFromAuth,
+} from "../../../utils/firebase/firebase";
 
 import FormInput from "../../../components/form-input/FromInput";
 import Button from "../../../components/button/Button";
@@ -21,8 +24,6 @@ const defaultFromFields: FormFields = {
 };
 
 export default function SignUp() {
-  const dispatch = useDispatch();
-
   const [formFields, setFormFields] = useState(defaultFromFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
@@ -43,16 +44,15 @@ export default function SignUp() {
 
   const onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    dispatch(signUpStart({ email, password, displayName }));
-    // try {
-    //   const args = [email, password] as const;
-    //   const { user } = await createAuthUserWithEmailAndPassword(...args);
-    //   await createUserDocumentFromAuth(user, { displayName });
-    // } catch (error) {
-    //   const err = error as AuthError;
-    //   const msg = `Failed to create new user: ${err.code}`;
-    //   alert(msg);
-    // }
+    try {
+      const args = [email, password] as const;
+      const { user } = await createAuthUserWithEmailAndPassword(...args);
+      await createUserDocumentFromAuth(user, { displayName });
+    } catch (error) {
+      const err = error as AuthError;
+      const msg = `Failed to create new user: ${err.code}`;
+      alert(msg);
+    }
   };
 
   return (

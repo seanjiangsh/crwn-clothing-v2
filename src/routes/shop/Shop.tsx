@@ -1,17 +1,20 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 
-import { fetchCategoriesStart } from "../../redux/categories/actions";
+import { useAppDispatch } from "../../redux/root-hook";
+import { categoryActions } from "../../redux/categories/reducer";
+import { getCategoriesAndDocuments } from "../../utils/firebase/firebase";
 
 import Preview from "./preview/Preview";
 import Category from "./category/Category";
 
 export default function Shop() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchCategoriesStart());
+    getCategoriesAndDocuments().then((categories) => {
+      dispatch(categoryActions.setCategories(categories));
+    });
   }, [dispatch]);
 
   return (

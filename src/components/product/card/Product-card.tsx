@@ -1,7 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-
-import { selectCartItems } from "../../../redux/cart/selectors";
-import { addCartItem } from "../../../redux/cart/actions";
+import { useAppDispatch } from "../../../redux/root-hook";
+import { cartActions } from "../../../redux/cart/reducer";
 
 import { Product } from "../../../types/common";
 
@@ -13,13 +11,12 @@ import {
   Price,
 } from "./Product-card.styles";
 
-export default function ProductCard(props: Product) {
-  const { name, imageUrl, price } = props;
+export default function ProductCard(product: Product) {
+  const { name, imageUrl, price } = product;
 
-  const items = useSelector(selectCartItems);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const add = () => dispatch(addCartItem(items, props));
+  const add = () => dispatch(cartActions.addCartItem(product));
 
   return (
     <ProductCardContainer>

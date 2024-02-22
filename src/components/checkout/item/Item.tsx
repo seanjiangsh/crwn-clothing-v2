@@ -1,12 +1,7 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch } from "../../../redux/root-hook";
+import { cartActions } from "../../../redux/cart/reducer";
 
 import { Item as CartItem } from "../../../redux/cart/types";
-import { selectCartItems } from "../../../redux/cart/selectors";
-import {
-  addCartItem,
-  removeCartItem,
-  clearCartItem,
-} from "../../../redux/cart/actions";
 
 import {
   CheckoutItemContainer,
@@ -18,15 +13,14 @@ import {
   RemoveButton,
 } from "./Item.styles";
 
-export default function Item(props: CartItem) {
-  const { name, imageUrl, price, quantity } = props;
+export default function Item(cartItem: CartItem) {
+  const { name, imageUrl, price, quantity } = cartItem;
 
-  const items = useSelector(selectCartItems);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const add = () => dispatch(addCartItem(items, props));
-  const remove = () => dispatch(removeCartItem(items, props));
-  const clear = () => dispatch(clearCartItem(items, props));
+  const add = () => dispatch(cartActions.addCartItem(cartItem));
+  const remove = () => dispatch(cartActions.removeCartItem(cartItem));
+  const clear = () => dispatch(cartActions.clearCartItem(cartItem));
 
   return (
     <CheckoutItemContainer>

@@ -1,15 +1,14 @@
-import { useSelector, useDispatch } from "react-redux";
-
+import { useAppDispatch, useAppSelector } from "../../../redux/root-hook";
 import { selectCartCount } from "../../../redux/cart/selectors";
-import { setCartOpened } from "../../../redux/cart/actions";
+import { cartActions } from "../../../redux/cart/reducer";
 
 import { CartIconContainer, ShoppingIcon, ItemCount } from "./Icon.styles";
 
 export default function Icon() {
-  const count = useSelector(selectCartCount);
-  const dispatch = useDispatch();
+  const count = useAppSelector(selectCartCount);
+  const dispatch = useAppDispatch();
 
-  const onClick = () => dispatch(setCartOpened());
+  const onClick = () => dispatch(cartActions.setCartOpened());
 
   return (
     <CartIconContainer onClick={onClick}>

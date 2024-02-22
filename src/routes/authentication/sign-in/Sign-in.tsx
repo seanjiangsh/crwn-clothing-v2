@@ -1,33 +1,36 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-
-import {
-  googleSignInStart,
-  emailSignInStart,
-} from "../../../redux/user/actions";
+import { AuthError } from "firebase/auth";
 
 import FormInput from "../../../components/form-input/FromInput";
 import Button from "../../../components/button/Button";
 import { SignInContainer, ButtonsContainer } from "./Sign-in.styles";
+import {
+  signInAuthUserWithEmailAndPassword,
+  signInWithGooglePopup,
+} from "../../../utils/firebase/firebase";
 
 type FormFields = { email: string; password: string };
 const defaultFromFields: FormFields = { email: "", password: "" };
 
 export default function SignIn() {
-  const dispatch = useDispatch();
-
   const [formFields, setFormFields] = useState(defaultFromFields);
   const { email, password } = formFields;
 
   const disableSubmit = !email || !password;
 
-  const googleSignIn = () => {
-    dispatch(googleSignInStart());
+  const googleSignIn = async () => {
+    await signInWithGooglePopup();
   };
 
   const onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    dispatch(emailSignInStart({ email, password }));
+    try {
+      await signInAuthUserWithEmailAndPassword(email, password);
+    } catch (error) {
+      const err = error as AuthError;
+      alert("Login failed, please try again");
+      console.warn(err);
+    }
   };
 
   const onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
