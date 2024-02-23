@@ -6,6 +6,7 @@ import {
 } from "../../redux/cart/selectors";
 
 import Item from "../../components/checkout/item/Item";
+import PaymentForm from "../../components/payment-form/Payment-form";
 import {
   CheckoutContainer,
   CheckoutHeader,
@@ -40,6 +41,7 @@ export default function Checkout() {
         return <Item key={item.id} {...item} />;
       })}
       <Total>{`Total: ${totalPrice}`}</Total>
+      <PaymentForm />
     </CheckoutContainer>
   );
 }
