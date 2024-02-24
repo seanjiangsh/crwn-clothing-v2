@@ -11,7 +11,6 @@ type ButtonType = "google-sign-in" | "inverted";
 type ButtonProps = {
   buttonType?: ButtonType;
   isLoading?: boolean;
-  children: string | JSX.Element;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const getButton = (buttonType?: ButtonType) => {

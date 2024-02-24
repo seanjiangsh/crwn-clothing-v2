@@ -19,10 +19,17 @@ import {
   writeBatch,
   getDocs,
   query,
+  QueryDocumentSnapshot,
 } from "firebase/firestore";
 
 import SHOP_DATA from "../../shop-data";
 import { Category } from "../../types/common";
+
+type UserData = {
+  createdAt: Date;
+  displayName: string;
+  email: string;
+};
 
 // * Your web app's Firebase configuration
 // * For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -67,7 +74,7 @@ export const db = getFirestore();
 export const createUserDocumentFromAuth = async (
   user: User,
   additionalInfo: any = {},
-) => {
+): Promise<QueryDocumentSnapshot<UserData> | void> => {
   const { uid, email } = user;
   const userDocRef = doc(db, "users", uid);
   const userSnapshot = await getDoc(userDocRef);
@@ -80,7 +87,7 @@ export const createUserDocumentFromAuth = async (
       console.warn(err);
     }
   }
-  return userSnapshot;
+  return userSnapshot as QueryDocumentSnapshot<UserData>;
 };
 
 export const signOutUser = async () => await signOut(auth);
@@ -117,12 +124,11 @@ export const getCategoriesAndDocuments = async (): Promise<Array<Category>> => {
   return categories;
 };
 
-export const getCurrentUser = () => {
-  return new Promise((resolve, reject) => {
+export const getCurrentUser = (): Promise<User | null> =>
+  new Promise((resolve, reject) => {
     const nextFn = (user: User | null) => {
       unsubscribe();
       resolve(user);
     };
     const unsubscribe = onAuthStateChanged(auth, nextFn, reject);
   });
-};

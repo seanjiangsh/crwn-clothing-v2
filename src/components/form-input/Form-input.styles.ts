@@ -14,7 +14,8 @@ export const Group = styled.div`
   }
 `;
 
-export const FormInputLabel = styled.label<{ shrink: string }>`
+type InputLabelProps = { shrink?: boolean };
+export const InputLabel = styled.label<InputLabelProps>`
   color: grey;
   font-size: 16px;
   font-weight: normal;
@@ -26,7 +27,7 @@ export const FormInputLabel = styled.label<{ shrink: string }>`
   ${({ shrink }) => shrink && shrinkLabelStyles}
 `;
 
-export const FormInput = styled.input`
+export const Input = styled.input`
   background: none;
   background-color: white;
   color: grey;
@@ -41,7 +42,7 @@ export const FormInput = styled.input`
   &:focus {
     outline: none;
   }
-  &:focus ~ ${FormInputLabel} {
+  &:focus ~ ${InputLabel} {
     ${shrinkLabelStyles}
   }
 `;

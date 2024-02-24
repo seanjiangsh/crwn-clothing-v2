@@ -1,4 +1,9 @@
-import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
+import {
+  Action,
+  Middleware,
+  ThunkAction,
+  configureStore,
+} from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { createLogger } from "redux-logger";
@@ -6,7 +11,7 @@ import { createLogger } from "redux-logger";
 import { rootReducer } from "./root-reducer";
 
 const logger = createLogger({ duration: true, collapsed: true });
-const middlewares: Array<any> = import.meta.env.DEV ? [logger] : [];
+const middlewares: Array<Middleware> = import.meta.env.DEV ? [logger] : [];
 
 const persistWhitelist = ["cart"];
 const persistedReducer = persistReducer(

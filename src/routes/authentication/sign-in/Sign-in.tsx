@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AuthError } from "firebase/auth";
 
-import FormInput from "../../../components/form-input/FromInput";
+import FormInput from "../../../components/form-input/From-input";
 import Button from "../../../components/button/Button";
 import { SignInContainer, ButtonsContainer } from "./Sign-in.styles";
 import {
