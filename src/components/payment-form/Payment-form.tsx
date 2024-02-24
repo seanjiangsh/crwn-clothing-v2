@@ -43,6 +43,10 @@ export default function PaymentForm() {
         <PaymentButton buttonType="inverted" isLoading={isProcessing}>
           Pay now
         </PaymentButton>
+        <div className="test-warning">
+          <p>*Please use the following test credit card for payments*</p>
+          <p>4242 4242 4242 4242 - (future date) - 242 - 42424</p>
+        </div>
       </FormContainer>
     </PaymentFormContainer>
   );
