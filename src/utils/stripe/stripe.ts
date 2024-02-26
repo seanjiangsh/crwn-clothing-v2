@@ -5,7 +5,6 @@ import {
   Stripe,
   StripeCardElement,
 } from "@stripe/stripe-js";
-import {} from "@stripe/stripe-js";
 import { User } from "firebase/auth";
 
 export const loadStripePromise = loadStripe(
