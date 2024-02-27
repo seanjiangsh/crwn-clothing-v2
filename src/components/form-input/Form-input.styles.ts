@@ -14,7 +14,7 @@ export const Group = styled.div`
   }
 `;
 
-type InputLabelProps = { shrink?: boolean };
+type InputLabelProps = { shrink?: string };
 export const InputLabel = styled.label<InputLabelProps>`
   color: grey;
   font-size: 16px;

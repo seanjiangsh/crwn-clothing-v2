@@ -16,8 +16,8 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type Collection = {
-  __typename?: 'Collection';
+export type Category = {
+  __typename?: 'Category';
   id: Scalars['ID']['output'];
   items: Array<Item>;
   title: Scalars['String']['output'];
@@ -25,7 +25,6 @@ export type Collection = {
 
 export type Item = {
   __typename?: 'Item';
-  collection?: Maybe<Collection>;
   id: Scalars['ID']['output'];
   imageUrl: Scalars['String']['output'];
   name: Scalars['String']['output'];
@@ -34,25 +33,25 @@ export type Item = {
 
 export type Query = {
   __typename?: 'Query';
-  collection?: Maybe<Collection>;
-  collections: Array<Collection>;
-  getCollectionsByTitle?: Maybe<Collection>;
+  categories: Array<Category>;
+  getCategoryById?: Maybe<Category>;
+  getCategoryByTitle?: Maybe<Category>;
 };
 
 
-export type QueryCollectionArgs = {
+export type QueryGetCategoryByIdArgs = {
   id: Scalars['ID']['input'];
 };
 
 
-export type QueryGetCollectionsByTitleArgs = {
+export type QueryGetCategoryByTitleArgs = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type GetCollectionsQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCollectionsQuery = { __typename?: 'Query', collections: Array<{ __typename?: 'Collection', id: string, title: string, items: Array<{ __typename?: 'Item', id: string, name: string, price: number, imageUrl: string }> }> };
+export type GetCategoriesQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', id: string, title: string, items: Array<{ __typename?: 'Item', id: string, name: string, price: number, imageUrl: string }> }> };
 
 
-export const GetCollectionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCollections"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"collections"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}}]}}]}}]}}]} as unknown as DocumentNode<GetCollectionsQuery, GetCollectionsQueryVariables>;
+export const GetCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}}]}}]}}]}}]} as unknown as DocumentNode<GetCategoriesQuery, GetCategoriesQueryVariables>;
