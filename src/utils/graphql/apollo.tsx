@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const apolloOptions = {
-  uri: "https://crwn-clothing.com/",
+  uri: "/.netlify/functions/graphql",
   cache: new InMemoryCache(),
 };
 

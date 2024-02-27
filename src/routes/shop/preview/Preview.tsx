@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../redux/root-hook";
 
 import {
   selectCategoriesMap,
@@ -10,8 +10,8 @@ import Spinner from "../../../components/spinner/Spinner";
 import PreviewComponent from "../../../components/category/preview/Preview";
 
 export default function Preview() {
-  const categories = useSelector(selectCategoriesMap);
-  const isLoading = useSelector(selectCategoriesIsLoading);
+  const categories = useAppSelector(selectCategoriesMap);
+  const isLoading = useAppSelector(selectCategoriesIsLoading);
 
   return (
     <React.Fragment>

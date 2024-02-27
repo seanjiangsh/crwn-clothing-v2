@@ -10,7 +10,8 @@ type FormInputProps = {
 export default function FormInput(props: FormInputProps) {
   const { label, ...otherProps } = props;
   const value = String(otherProps.value);
-  const shrink = !!value.length;
+  const shrink = value.length ? "true" : undefined;
+
   return (
     <Group>
       <Input {...otherProps} />

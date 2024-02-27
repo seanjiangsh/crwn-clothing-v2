@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../redux/root-hook";
 import { useParams } from "react-router-dom";
-
 import { useQuery } from "@apollo/client";
-import { gql } from "../../../utils/graphql";
 
+import { gql } from "../../../utils/graphql";
 import {
   selectCategoriesMap,
   selectCategoriesIsLoading,
@@ -16,9 +15,9 @@ import Spinner from "../../../components/spinner/Spinner";
 import ProductCard from "../../../components/product/card/Product-card";
 import { CategoryTitle, CategoryContainer } from "./Category.styles";
 
-const COLLECTIONS = gql(/* GraphQL */ `
-  query GetCollections {
-    collections {
+const CATEGORIES = gql(/* GraphQL */ `
+  query GetCategories {
+    categories {
       id
       title
       items {
@@ -33,11 +32,10 @@ const COLLECTIONS = gql(/* GraphQL */ `
 
 export default function Category() {
   const { category } = useParams();
-  const { loading, error, data } = useQuery(COLLECTIONS);
+  const { loading, error, data } = useQuery(CATEGORIES);
   console.log(loading, error, data);
-  const categories = useSelector(selectCategoriesMap);
-  const isLoading = useSelector(selectCategoriesIsLoading);
-
+  const categories = useAppSelector(selectCategoriesMap);
+  const isLoading = useAppSelector(selectCategoriesIsLoading);
   const [products, setProducts] = useState<Array<Product>>([]);
 
   useEffect(() => {

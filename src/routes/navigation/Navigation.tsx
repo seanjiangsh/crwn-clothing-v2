@@ -1,7 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 
+import { useAppSelector } from "../../redux/root-hook";
 import { selectUser } from "../../redux/user/selectors";
 import { selectCartOpened } from "../../redux/cart/selectors";
 
@@ -18,8 +18,8 @@ import {
 } from "./Navigation.styles";
 
 export default function Navigation() {
-  const user = useSelector(selectUser);
-  const opened = useSelector(selectCartOpened);
+  const user = useAppSelector(selectUser);
+  const opened = useAppSelector(selectCartOpened);
 
   return (
     <React.Fragment>
