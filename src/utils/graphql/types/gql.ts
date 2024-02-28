@@ -14,6 +14,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  query GetCategories {\n    categories {\n      id\n      title\n      items {\n        id\n        name\n        price\n        imageUrl\n      }\n    }\n  }\n": types.GetCategoriesDocument,
+    "\n  query GetCategoryById($id: ID!) {\n    getCategoryById(id: $id) {\n      id\n      title\n      items {\n        id\n        name\n        price\n        imageUrl\n      }\n    }\n  }\n": types.GetCategoryByIdDocument,
+    "\n  query GetCategoryByTitle($title: String!) {\n    getCategoryByTitle(title: $title) {\n      id\n      title\n      items {\n        id\n        name\n        price\n        imageUrl\n      }\n    }\n  }\n": types.GetCategoryByTitleDocument,
 };
 
 /**
@@ -34,6 +36,14 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetCategories {\n    categories {\n      id\n      title\n      items {\n        id\n        name\n        price\n        imageUrl\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCategories {\n    categories {\n      id\n      title\n      items {\n        id\n        name\n        price\n        imageUrl\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetCategoryById($id: ID!) {\n    getCategoryById(id: $id) {\n      id\n      title\n      items {\n        id\n        name\n        price\n        imageUrl\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCategoryById($id: ID!) {\n    getCategoryById(id: $id) {\n      id\n      title\n      items {\n        id\n        name\n        price\n        imageUrl\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetCategoryByTitle($title: String!) {\n    getCategoryByTitle(title: $title) {\n      id\n      title\n      items {\n        id\n        name\n        price\n        imageUrl\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCategoryByTitle($title: String!) {\n    getCategoryByTitle(title: $title) {\n      id\n      title\n      items {\n        id\n        name\n        price\n        imageUrl\n      }\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev2": "concurrently \"npm run netlify\" \"npm run gql-codegen\"",
+    "dev-sls": "concurrently \"npm run netlify\" \"npm run gql-codegen\"",
     "netlify": "netlify dev",
     "gql-codegen": "wait-on http-get://localhost:8888/.netlify/functions/graphql?query=%7B__typename%7D && graphql-codegen -c graphql/codegen.ts -w",
     "build": "tsc && vite build",
@@ -37,6 +37,7 @@
     "@graphql-typed-document-node/core": "^3.2.0",
     "@parcel/watcher": "^2.4.1",
     "@svgr/rollup": "^8.1.0",
+    "@types/aws-lambda": "^8.10.134",
     "@types/react": "18.2.58",
     "@types/react-dom": "18.2.19",
     "@types/redux-logger": "^3.0.13",

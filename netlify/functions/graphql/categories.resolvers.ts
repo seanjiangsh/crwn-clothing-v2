@@ -13,7 +13,9 @@ export const resolvers = {
     },
     getCategoryByTitle(root: RootValue, args: { title: string }) {
       const { title } = args;
-      return Categories.find((c) => c.title === title);
+      return Categories.find(
+        (c) => c.title.toLowerCase() === title.toLowerCase(),
+      );
     },
   },
 };

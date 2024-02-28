@@ -1,4 +1,4 @@
-import { useAppDispatch } from "../../../redux/root-hook";
+import { useDispatch } from "../../../redux/root-hook";
 import { cartActions } from "../../../redux/cart/reducer";
 
 import { Item as CartItem } from "../../../redux/cart/types";
@@ -16,7 +16,7 @@ import {
 export default function Item(cartItem: CartItem) {
   const { name, imageUrl, price, quantity } = cartItem;
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const add = () => dispatch(cartActions.addCartItem(cartItem));
   const remove = () => dispatch(cartActions.removeCartItem(cartItem));

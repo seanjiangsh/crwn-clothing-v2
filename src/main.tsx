@@ -10,7 +10,7 @@ import { StyleSheetManager } from "styled-components";
 import store, { persister } from "./redux/root-store.ts";
 import { loadStripePromise } from "./utils/stripe/stripe.ts";
 
-import { apolloClient } from "./utils/graphql/apollo.tsx";
+import { apolloClient } from "./utils/graphql/apollo/apollo.tsx";
 import App from "./App.tsx";
 import "./index.css";
 
