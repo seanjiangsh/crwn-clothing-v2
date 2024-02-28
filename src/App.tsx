@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { useAppDispatch } from "./redux/root-hook";
+import { useDispatch } from "./redux/root-hook";
 import { userActions } from "./redux/user/reducer";
 import {
   addCollectionAndDocuments,
@@ -17,13 +17,11 @@ import Checkout from "./routes/checkout/Checkout";
 import Authentication from "./routes/authentication/Authentication";
 
 export default function App() {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
-      if (user) {
-        createUserDocumentFromAuth(user);
-      }
+      if (user) createUserDocumentFromAuth(user);
       dispatch(userActions.setCurrentUser(user));
     });
 

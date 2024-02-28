@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import { useAppSelector } from "../../../redux/root-hook";
+import { useSelector } from "../../../redux/root-hook";
 import { selectCartItems } from "../../../redux/cart/selectors";
 
 import Button from "../../button/Button";
@@ -12,7 +12,7 @@ import {
 } from "./DropDown.styles";
 
 export default function DropDown() {
-  const items = useAppSelector(selectCartItems);
+  const items = useSelector(selectCartItems);
   const navigate = useNavigate();
 
   const onClick = () => navigate("/checkout");

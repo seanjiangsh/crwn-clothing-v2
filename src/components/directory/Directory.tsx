@@ -1,50 +1,21 @@
+import { useQuery } from "@apollo/client";
+
 import DirectoryItem from "./item/Item";
 import { DirectoryContainer } from "./Directory.styles";
-
-export type DirectoryCategory = {
-  id: number;
-  title: string;
-  imageUrl: string;
-  route: string;
-};
-const categories: Array<DirectoryCategory> = [
-  {
-    id: 1,
-    title: "hats",
-    imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-    route: "shop/hats",
-  },
-  {
-    id: 2,
-    title: "jackets",
-    imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-    route: "shop/jackets",
-  },
-  {
-    id: 3,
-    title: "sneakers",
-    imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-    route: "shop/sneakers",
-  },
-  {
-    id: 4,
-    title: "womens",
-    imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
-    route: "shop/womens",
-  },
-  {
-    id: 5,
-    title: "mens",
-    imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
-    route: "shop/mens",
-  },
-];
+import { getCategories } from "../../utils/graphql/query/categories";
 
 export default function Directory() {
+  const { data } = useQuery(getCategories);
+
   return (
     <DirectoryContainer>
-      {categories.map((category) => (
-        <DirectoryItem key={category.id} {...category} />
+      {data?.categories.map(({ id, title, items }) => (
+        <DirectoryItem
+          key={id}
+          title={title}
+          imageUrl={items[0].imageUrl}
+          route={`shop/${title}`}
+        />
       ))}
     </DirectoryContainer>
   );
