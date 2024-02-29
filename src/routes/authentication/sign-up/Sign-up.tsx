@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { AuthError } from "firebase/auth";
 
 import {
@@ -34,26 +34,32 @@ export default function SignUp() {
     !confirmPassword ||
     password !== confirmPassword;
 
-  const onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = ev.target;
-    const field = id.split("-").at(-1);
-    if (!field || !Object.keys(formFields).includes(field)) return;
-    const newFields = { ...formFields, [field]: value };
-    setFormFields(newFields);
-  };
+  const onChange = useCallback(
+    (ev: React.ChangeEvent<HTMLInputElement>) => {
+      const { id, value } = ev.target;
+      const field = id.split("-").at(-1);
+      if (!field || !Object.keys(formFields).includes(field)) return;
+      const newFields = { ...formFields, [field]: value };
+      setFormFields(newFields);
+    },
+    [formFields],
+  );
 
-  const onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
-    ev.preventDefault();
-    try {
-      const args = [email, password] as const;
-      const { user } = await createAuthUserWithEmailAndPassword(...args);
-      await createUserDocumentFromAuth(user, { displayName });
-    } catch (error) {
-      const err = error as AuthError;
-      const msg = `Failed to create new user: ${err.code}`;
-      alert(msg);
-    }
-  };
+  const onSubmit = useCallback(
+    async (ev: React.FormEvent<HTMLFormElement>) => {
+      ev.preventDefault();
+      try {
+        const args = [email, password] as const;
+        const { user } = await createAuthUserWithEmailAndPassword(...args);
+        await createUserDocumentFromAuth(user, { displayName });
+      } catch (error) {
+        const err = error as AuthError;
+        const msg = `Failed to create new user: ${err.code}`;
+        alert(msg);
+      }
+    },
+    [displayName, email, password],
+  );
 
   return (
     <SignUpContainer>

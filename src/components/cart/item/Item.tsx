@@ -1,8 +1,9 @@
+import { FC, memo } from "react";
 import { Item as CartItem } from "../../../redux/cart/types";
 
 import { CartItemContainer, ItemDetails, ItemText } from "./Item.styles";
 
-export default function Item(props: CartItem) {
+const Item: FC<CartItem> = memo((props) => {
   const { name, imageUrl, price, quantity } = props;
 
   return (
@@ -14,4 +15,6 @@ export default function Item(props: CartItem) {
       </ItemDetails>
     </CartItemContainer>
   );
-}
+});
+
+export default Item;

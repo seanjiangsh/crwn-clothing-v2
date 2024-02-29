@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { AuthError } from "firebase/auth";
 
 import FormInput from "../../../components/form-input/From-input";
@@ -22,24 +22,30 @@ export default function SignIn() {
     await signInWithGooglePopup();
   };
 
-  const onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
-    ev.preventDefault();
-    try {
-      await signInAuthUserWithEmailAndPassword(email, password);
-    } catch (error) {
-      const err = error as AuthError;
-      alert("Login failed, please try again");
-      console.warn(err);
-    }
-  };
+  const onSubmit = useCallback(
+    async (ev: React.FormEvent<HTMLFormElement>) => {
+      ev.preventDefault();
+      try {
+        await signInAuthUserWithEmailAndPassword(email, password);
+      } catch (error) {
+        const err = error as AuthError;
+        alert("Login failed, please try again");
+        console.warn(err);
+      }
+    },
+    [email, password],
+  );
 
-  const onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = ev.target;
-    const field = id.split("-").at(-1);
-    if (!field || !Object.keys(formFields).includes(field)) return;
-    const newFields = { ...formFields, [field]: value };
-    setFormFields(newFields);
-  };
+  const onChange = useCallback(
+    (ev: React.ChangeEvent<HTMLInputElement>) => {
+      const { id, value } = ev.target;
+      const field = id.split("-").at(-1);
+      if (!field || !Object.keys(formFields).includes(field)) return;
+      const newFields = { ...formFields, [field]: value };
+      setFormFields(newFields);
+    },
+    [formFields],
+  );
 
   return (
     <SignInContainer>

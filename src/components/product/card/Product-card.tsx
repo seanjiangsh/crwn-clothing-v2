@@ -1,3 +1,4 @@
+import React, { memo } from "react";
 import { useDispatch } from "../../../redux/root-hook";
 import { cartActions } from "../../../redux/cart/reducer";
 
@@ -11,12 +12,10 @@ import {
   Price,
 } from "./Product-card.styles";
 
-export default function ProductCard(product: Product) {
-  const { name, imageUrl, price } = product;
-
+const ProductCard = memo((props: Product) => {
+  const { name, imageUrl, price } = props;
   const dispatch = useDispatch();
-
-  const add = () => dispatch(cartActions.addCartItem(product));
+  const add = () => dispatch(cartActions.addCartItem(props));
 
   return (
     <ProductCardContainer>
@@ -30,4 +29,6 @@ export default function ProductCard(product: Product) {
       </Button>
     </ProductCardContainer>
   );
-}
+});
+
+export default ProductCard;
