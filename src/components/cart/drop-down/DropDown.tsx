@@ -1,7 +1,9 @@
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useSelector } from "../../../redux/root-hook";
+import { useSelector, useDispatch } from "../../../redux/root-hook";
 import { selectCartItems } from "../../../redux/cart/selectors";
+import { cartActions } from "../../../redux/cart/reducer";
 
 import Button from "../../button/Button";
 import Item from "../item/Item";
@@ -13,9 +15,13 @@ import {
 
 export default function DropDown() {
   const items = useSelector(selectCartItems);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onClick = () => navigate("/checkout");
+  const goToCheckout = useCallback(() => {
+    navigate("/checkout");
+    dispatch(cartActions.setCartOpened());
+  }, [navigate, dispatch]);
 
   return (
     <CartDropdownContainer>
@@ -26,7 +32,7 @@ export default function DropDown() {
           <EmptyMessage>Your cart is empty</EmptyMessage>
         )}
       </CartItems>
-      <Button onClick={onClick}>GO TO CHECKOUT</Button>
+      <Button onClick={goToCheckout}>GO TO CHECKOUT</Button>
     </CartDropdownContainer>
   );
 }

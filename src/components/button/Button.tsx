@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, memo } from "react";
 
 import {
   BaseButton,
@@ -24,7 +24,7 @@ const getButton = (buttonType?: ButtonType) => {
   }
 };
 
-export default function Button(props: ButtonProps) {
+const Button: FC<ButtonProps> = memo((props: ButtonProps) => {
   const { buttonType, isLoading, children, ...otherProps } = props;
   const CustomButton = getButton(buttonType);
   return (
@@ -32,4 +32,6 @@ export default function Button(props: ButtonProps) {
       {isLoading ? <ButtonSpinner /> : children}
     </CustomButton>
   );
-}
+});
+
+export default Button;

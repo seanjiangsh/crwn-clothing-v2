@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { useDispatch } from "./redux/root-hook";
@@ -10,11 +10,14 @@ import {
 } from "./utils/firebase/firebase";
 import SHOP_DATA from "./shop-data";
 
-import Navigation from "./routes/navigation/Navigation";
-import Home from "./routes/home/Home";
-import Shop from "./routes/shop/Shop";
-import Checkout from "./routes/checkout/Checkout";
-import Authentication from "./routes/authentication/Authentication";
+import Spinner from "./components/spinner/Spinner";
+const Home = lazy(() => import("./routes/home/Home"));
+const Navigation = lazy(() => import("./routes/navigation/Navigation"));
+const Shop = lazy(() => import("./routes/shop/Shop"));
+const Checkout = lazy(() => import("./routes/checkout/Checkout"));
+const Authentication = lazy(
+  () => import("./routes/authentication/Authentication"),
+);
 
 export default function App() {
   const dispatch = useDispatch();
@@ -33,13 +36,15 @@ export default function App() {
   }, []);
 
   return (
-    <Routes>
-      <Route path="/" element={<Navigation />}>
-        <Route index element={<Home />} />
-        <Route path="/shop/*" element={<Shop />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/auth" element={<Authentication />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={<Spinner />}>
+      <Routes>
+        <Route path="/" element={<Navigation />}>
+          <Route index element={<Home />} />
+          <Route path="/shop/*" element={<Shop />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/auth" element={<Authentication />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }

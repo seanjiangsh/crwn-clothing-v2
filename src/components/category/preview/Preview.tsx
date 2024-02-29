@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 
 import { Product } from "../../../types/common";
@@ -11,6 +12,10 @@ import {
 type PreviewProps = { title: string; products: Array<Product> };
 export default function Preview(props: PreviewProps) {
   const { title, products } = props;
+  const filteredProducts = useMemo(
+    () => products.filter((_, i) => i < 4),
+    [products],
+  );
 
   return (
     <CategoryPreviewContainer>
@@ -18,11 +23,9 @@ export default function Preview(props: PreviewProps) {
         <Link to={title}>{title.toUpperCase()}</Link>
       </Title>
       <PreviewContainer>
-        {products
-          .filter((_, i) => i < 4)
-          .map((p) => (
-            <ProductCard key={p.id} {...p} />
-          ))}
+        {filteredProducts.map((p) => (
+          <ProductCard key={p.id} {...p} />
+        ))}
       </PreviewContainer>
     </CategoryPreviewContainer>
   );
