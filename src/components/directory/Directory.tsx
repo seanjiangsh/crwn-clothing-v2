@@ -14,7 +14,7 @@ export default function Directory() {
           key={id}
           title={title}
           imageUrl={items[0].imageUrl}
-          route={`shop/${title}`}
+          route={`shop/${title.toLowerCase()}`}
         />
       ))}
     </DirectoryContainer>

@@ -10,6 +10,7 @@ import {
   PaymentFormContainer,
   FormContainer,
   PaymentButton,
+  TestDescription,
 } from "./Payment-form.style";
 
 export default function PaymentForm() {
@@ -43,10 +44,10 @@ export default function PaymentForm() {
         <PaymentButton buttonType="inverted" isLoading={isProcessing}>
           Pay now
         </PaymentButton>
-        <div className="test-warning">
+        <TestDescription>
           <p>*Please use the following test credit card for payments*</p>
           <p>4242 4242 4242 4242 - (future date) - 242 - 42424</p>
-        </div>
+        </TestDescription>
       </FormContainer>
     </PaymentFormContainer>
   );

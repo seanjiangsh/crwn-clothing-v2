@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 import { getCategoryByTitle } from "../../../utils/graphql/query/categories";
@@ -12,20 +12,20 @@ export default function Category() {
   const params = useParams();
   const categoryTitle = params.category || "";
   const queryArgs = { variables: { title: categoryTitle } };
-  const { data } = useQuery(getCategoryByTitle, queryArgs);
+  const { loading, data } = useQuery(getCategoryByTitle, queryArgs);
 
-  return (
+  return loading ? (
+    <Spinner />
+  ) : data?.getCategoryByTitle ? (
     <React.Fragment>
-      <CategoryTitle>{categoryTitle.toLowerCase()}</CategoryTitle>
-      {data?.getCategoryByTitle ? (
-        <CategoryContainer>
-          {data.getCategoryByTitle.items.map((p) => (
-            <ProductCard key={p.id} {...p} />
-          ))}
-        </CategoryContainer>
-      ) : (
-        <Spinner />
-      )}
+      <CategoryTitle>{categoryTitle.toUpperCase()}</CategoryTitle>
+      <CategoryContainer>
+        {data.getCategoryByTitle.items.map((p) => (
+          <ProductCard key={p.id} {...p} />
+        ))}
+      </CategoryContainer>
     </React.Fragment>
+  ) : (
+    <Navigate to="/shop" />
   );
 }

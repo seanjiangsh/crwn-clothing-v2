@@ -20,7 +20,7 @@ export default function Preview(props: PreviewProps) {
   return (
     <CategoryPreviewContainer>
       <Title>
-        <Link to={title}>{title.toUpperCase()}</Link>
+        <Link to={title.toLowerCase()}>{title.toUpperCase()}</Link>
       </Title>
       <PreviewContainer>
         {filteredProducts.map((p) => (

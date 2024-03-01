@@ -1,13 +1,14 @@
 import { useCallback, useState } from "react";
 import { AuthError } from "firebase/auth";
 
-import FormInput from "../../../components/form-input/From-input";
-import Button from "../../../components/button/Button";
-import { SignInContainer, ButtonsContainer } from "./Sign-in.styles";
 import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from "../../../utils/firebase/firebase";
+
+import FormInput from "../../../components/form-input/From-input";
+import Button from "../../../components/button/Button";
+import { SignInContainer, ButtonsContainer } from "./Sign-in.styles";
 
 type FormFields = { email: string; password: string };
 const defaultFromFields: FormFields = { email: "", password: "" };

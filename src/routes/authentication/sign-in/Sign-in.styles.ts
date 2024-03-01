@@ -7,6 +7,7 @@ export const SignInContainer = styled.div`
   h2 {
     margin: 10px 0;
   }
+  margin-bottom: 30px;
 `;
 
 export const ButtonsContainer = styled.div`

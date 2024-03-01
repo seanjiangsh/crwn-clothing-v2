@@ -15,6 +15,7 @@ import {
   LogoContainer,
   NavLinks,
   NavLink,
+  OutletContainer,
 } from "./Navigation.styles";
 
 export default function Navigation() {
@@ -25,7 +26,7 @@ export default function Navigation() {
     <React.Fragment>
       <NavigationContainer>
         <LogoContainer to="/">
-          <CrwnLogo className="logo" />
+          <CrwnLogo />
         </LogoContainer>
         <NavLinks>
           <NavLink to="/shop">SHOP</NavLink>
@@ -39,8 +40,10 @@ export default function Navigation() {
           <CartIcon />
         </NavLinks>
         {opened && <CartDropDown />}
-      </NavigationContainer>
-      <Outlet />
+      </NavigationContainer>{" "}
+      <OutletContainer>
+        <Outlet />
+      </OutletContainer>
     </React.Fragment>
   );
 }
