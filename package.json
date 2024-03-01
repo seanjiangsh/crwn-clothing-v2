@@ -53,6 +53,7 @@
     "prettier": "3.2.5",
     "typescript": "^5.3.3",
     "vite": "5.1.4",
+    "vite-plugin-pwa": "^0.19.1",
     "wait-on": "^7.2.0"
   }
 }

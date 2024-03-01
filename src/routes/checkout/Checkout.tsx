@@ -20,11 +20,9 @@ export default function Checkout() {
   return (
     <CheckoutContainer>
       <CheckoutHeader>
+        <HeaderBlock />
         <HeaderBlock>
-          <span>Prouct</span>
-        </HeaderBlock>
-        <HeaderBlock>
-          <span>Description</span>
+          <span>Product</span>
         </HeaderBlock>
         <HeaderBlock>
           <span>Quantity</span>
@@ -32,9 +30,7 @@ export default function Checkout() {
         <HeaderBlock>
           <span>Price</span>
         </HeaderBlock>
-        <HeaderBlock>
-          <span>Remove</span>
-        </HeaderBlock>
+        <HeaderBlock />
       </CheckoutHeader>
       {items.map((item) => {
         return <Item key={item.id} {...item} />;

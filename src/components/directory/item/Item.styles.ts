@@ -9,7 +9,8 @@ export const BackgroundImage = styled.div<{ imageurl: string }>`
 `;
 
 export const Body = styled.div`
-  height: 90px;
+  width: 130px;
+  height: 100px;
   padding: 0 25px;
   display: flex;
   flex-direction: column;
@@ -35,8 +36,9 @@ export const Body = styled.div`
 export const DirectoryItemContainer = styled.div`
   min-width: 30%;
   height: 240px;
-  flex: 1 1 auto;
+  position: relative;
   display: flex;
+  flex: 1 1 auto;
   align-items: center;
   justify-content: center;
   border: 1px solid black;
@@ -57,5 +59,8 @@ export const DirectoryItemContainer = styled.div`
   }
   &:last-child {
     margin-left: 7.5px;
+  }
+  @media screen and (max-width: 800px) {
+    height: 200px;
   }
 `;
