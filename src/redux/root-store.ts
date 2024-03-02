@@ -20,7 +20,7 @@ const persistedReducer = persistReducer(
 );
 
 const defaultMiddlewareConfig = { serializableCheck: false };
-const setupStore = (preloadedState?: RootState) => {
+export const setupStore = (preloadedState?: RootState) => {
   return configureStore({
     reducer: persistedReducer,
     middleware: (gDM) => gDM(defaultMiddlewareConfig).concat(middlewares),
@@ -33,6 +33,7 @@ export const persister = persistStore(store);
 
 export default store;
 export type AppDispatch = typeof store.dispatch;
+export type AppStore = ReturnType<typeof setupStore>;
 export type RootState = ReturnType<typeof persistedReducer>;
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,

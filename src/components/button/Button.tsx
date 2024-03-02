@@ -27,9 +27,10 @@ const getButton = (buttonType?: ButtonType) => {
 const Button: FC<ButtonProps> = memo((props: ButtonProps) => {
   const { buttonType, isLoading, children, ...otherProps } = props;
   const CustomButton = getButton(buttonType);
+  const otherAttr = { "button-type": buttonType || "" };
   return (
-    <CustomButton {...otherProps}>
-      {isLoading ? <ButtonSpinner /> : children}
+    <CustomButton {...otherProps} {...otherAttr}>
+      {isLoading ? <ButtonSpinner data-testid="spinner" /> : children}
     </CustomButton>
   );
 });

@@ -37,5 +37,3 @@ export const Total = styled.div`
   margin-left: auto;
   font-size: 36px;
 `;
-
-// TODO: RWD

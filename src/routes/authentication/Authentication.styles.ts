@@ -5,4 +5,5 @@ export const AuthenticationContainer = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  padding: 20px;
 `;
