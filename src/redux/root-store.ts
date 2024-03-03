@@ -17,10 +17,10 @@ const persistWhitelist = ["cart"];
 const persistedReducer = persistReducer(
   { key: "root", storage, whitelist: persistWhitelist },
   rootReducer,
-);
+) as unknown as typeof rootReducer;
 
 const defaultMiddlewareConfig = { serializableCheck: false };
-export const setupStore = (preloadedState?: RootState) => {
+export const setupStore = (preloadedState?: Partial<RootState>) => {
   return configureStore({
     reducer: persistedReducer,
     middleware: (gDM) => gDM(defaultMiddlewareConfig).concat(middlewares),
@@ -34,7 +34,7 @@ export const persister = persistStore(store);
 export default store;
 export type AppDispatch = typeof store.dispatch;
 export type AppStore = ReturnType<typeof setupStore>;
-export type RootState = ReturnType<typeof persistedReducer>;
+export type RootState = ReturnType<typeof rootReducer>;
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
   RootState,
