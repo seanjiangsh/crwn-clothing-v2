@@ -11,9 +11,9 @@ export default function Icon() {
   const onClick = () => dispatch(cartActions.setCartOpened());
 
   return (
-    <CartIconContainer onClick={onClick}>
+    <CartIconContainer data-testid="cart-icon" onClick={onClick}>
       <ShoppingIcon />
-      <ItemCount>{count}</ItemCount>
+      <ItemCount data-testid="cart-item-count">{count}</ItemCount>
     </CartIconContainer>
   );
 }

@@ -24,7 +24,7 @@ export default function DropDown() {
   }, [navigate, dispatch]);
 
   return (
-    <CartDropdownContainer>
+    <CartDropdownContainer data-testid="cart-drop-down">
       <CartItems>
         {items.length ? (
           items.map((item) => <Item key={item.id} {...item} />)

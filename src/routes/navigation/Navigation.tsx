@@ -26,21 +26,23 @@ export default function Navigation() {
     <React.Fragment>
       <NavigationContainer>
         <LogoContainer to="/">
-          <CrwnLogo />
+          <CrwnLogo data-testid="nav-crwn-logo" />
         </LogoContainer>
         <NavLinks>
           <NavLink to="/shop">SHOP</NavLink>
           {user ? (
-            <NavLink as="span" onClick={signOutUser}>
+            <NavLink data-testid="nav-sign-out" as="span" onClick={signOutUser}>
               SIGN OUT
             </NavLink>
           ) : (
-            <NavLink to="/auth">SIGN IN</NavLink>
+            <NavLink data-testid="nav-sign-in" to="/auth">
+              SIGN IN
+            </NavLink>
           )}
           <CartIcon />
         </NavLinks>
         {opened && <CartDropDown />}
-      </NavigationContainer>{" "}
+      </NavigationContainer>
       <OutletContainer>
         <Outlet />
       </OutletContainer>
