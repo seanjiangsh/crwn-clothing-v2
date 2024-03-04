@@ -1,9 +1,11 @@
+import { vi } from "vitest";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { User } from "firebase/auth";
 
 import Navigation from "../Navigation";
 import { renderWithProviders } from "../../../utils/tests/utils-for-tests";
+import * as firebaseUtils from "../../../utils/firebase/firebase";
 
 describe("Navigation component", () => {
   const user = userEvent.setup();
@@ -48,5 +50,17 @@ describe("Navigation component", () => {
     await user.click(cartIcon);
     const cartDropdown = screen.getByTestId("cart-drop-down");
     expect(cartDropdown).toBeInTheDocument();
+  });
+
+  it("calls the signOut function when sign out link is clicked", async () => {
+    const spy = vi.spyOn(firebaseUtils, "signOutUser");
+    const firebaseUser = { displayName: "John Doe" } as User;
+    const preloadedState = {
+      user: { user: firebaseUser, isLoading: false, error: null },
+    };
+    renderWithProviders(<Navigation />, { preloadedState });
+    const signOut = screen.getByTestId("nav-sign-out");
+    await user.click(signOut);
+    expect(spy).toHaveBeenCalled();
   });
 });
