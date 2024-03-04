@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import { useDispatch } from "../../../redux/root-hook";
 import { cartActions } from "../../../redux/cart/reducer";
 
