@@ -18,7 +18,7 @@ const ProductCard = memo((props: Product) => {
   const add = () => dispatch(cartActions.addCartItem(props));
 
   return (
-    <ProductCardContainer>
+    <ProductCardContainer data-testid="product-card">
       <img src={imageUrl} alt={name} />
       <Footer>
         <Name>{name} </Name>

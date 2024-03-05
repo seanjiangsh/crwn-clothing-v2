@@ -30,7 +30,7 @@ const Button: FC<ButtonProps> = memo((props: ButtonProps) => {
   const otherAttr = { "button-type": buttonType || "" };
   return (
     <CustomButton {...otherProps} {...otherAttr}>
-      {isLoading ? <ButtonSpinner data-testid="spinner" /> : children}
+      {isLoading ? <ButtonSpinner data-testid="button-spinner" /> : children}
     </CustomButton>
   );
 });

@@ -42,7 +42,7 @@ export default function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Navigation />}>
-          <Route index element={<Home />} />
+          <Route index element={<Home data-testid="home" />} />
           <Route path="/shop/*" element={<Shop />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/auth" element={<Authentication />} />
