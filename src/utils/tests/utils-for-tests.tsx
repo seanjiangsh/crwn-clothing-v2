@@ -3,7 +3,7 @@ import { RenderOptions, render } from "@testing-library/react";
 
 import { PersistGate } from "redux-persist/integration/react";
 import { ApolloProvider } from "@apollo/client";
-import { BrowserRouter } from "react-router-dom";
+// import { BrowserRouter } from "react-router-dom";
 import { Elements } from "@stripe/react-stripe-js";
 import { StyleSheetManager } from "styled-components";
 
@@ -37,13 +37,11 @@ export function renderWithProviders(
       <Provider store={store}>
         <PersistGate persistor={persister}>
           <ApolloProvider client={apolloClient}>
-            <BrowserRouter>
-              <Elements stripe={loadStripePromise}>
-                <StyleSheetManager shouldForwardProp={() => true}>
-                  {children}
-                </StyleSheetManager>
-              </Elements>
-            </BrowserRouter>
+            <Elements stripe={loadStripePromise}>
+              <StyleSheetManager shouldForwardProp={() => true}>
+                {children}
+              </StyleSheetManager>
+            </Elements>
           </ApolloProvider>
         </PersistGate>
       </Provider>

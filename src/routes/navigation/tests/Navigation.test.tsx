@@ -2,6 +2,7 @@ import { vi } from "vitest";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { User } from "firebase/auth";
+import { MemoryRouter } from "react-router-dom";
 
 import Navigation from "../Navigation";
 import { renderWithProviders } from "../../../utils/tests/utils-for-tests";
@@ -11,7 +12,11 @@ describe("Navigation component", () => {
   const user = userEvent.setup();
 
   it("renders the navigation bar correctly", () => {
-    renderWithProviders(<Navigation />);
+    renderWithProviders(
+      <MemoryRouter initialEntries={["/"]}>
+        <Navigation />
+      </MemoryRouter>,
+    );
 
     const logo = screen.getByTestId("nav-crwn-logo");
     const shopLink = screen.getByRole("link", { name: /shop/i });
@@ -29,7 +34,12 @@ describe("Navigation component", () => {
     const preloadedState = {
       user: { user: firebaseUser, isLoading: false, error: null },
     };
-    renderWithProviders(<Navigation />, { preloadedState });
+    renderWithProviders(
+      <MemoryRouter initialEntries={["/"]}>
+        <Navigation />
+      </MemoryRouter>,
+      { preloadedState },
+    );
     const signOut = screen.getByTestId("nav-sign-out");
     expect(signOut).toBeInTheDocument();
   });
@@ -38,14 +48,24 @@ describe("Navigation component", () => {
     const preloadedState = {
       user: { user: null, isLoading: false, error: null },
     };
-    renderWithProviders(<Navigation />, { preloadedState });
+    renderWithProviders(
+      <MemoryRouter initialEntries={["/"]}>
+        <Navigation />
+      </MemoryRouter>,
+      { preloadedState },
+    );
     const signIn = screen.getByTestId("nav-sign-in");
     expect(signIn).toBeInTheDocument();
   });
 
   it("renders CartDropDown when cart is closed and cart icon is clicked", async () => {
     const preloadedState = { cart: { opened: false, items: [] } };
-    renderWithProviders(<Navigation />, { preloadedState });
+    renderWithProviders(
+      <MemoryRouter initialEntries={["/"]}>
+        <Navigation />
+      </MemoryRouter>,
+      { preloadedState },
+    );
     const cartIcon = screen.getByTestId("cart-icon");
     await user.click(cartIcon);
     const cartDropdown = screen.getByTestId("cart-drop-down");
@@ -58,7 +78,12 @@ describe("Navigation component", () => {
     const preloadedState = {
       user: { user: firebaseUser, isLoading: false, error: null },
     };
-    renderWithProviders(<Navigation />, { preloadedState });
+    renderWithProviders(
+      <MemoryRouter initialEntries={["/"]}>
+        <Navigation />
+      </MemoryRouter>,
+      { preloadedState },
+    );
     const signOut = screen.getByTestId("nav-sign-out");
     await user.click(signOut);
     expect(spy).toHaveBeenCalled();

@@ -1,4 +1,4 @@
-import { expect, describe, it, vi } from "vitest";
+import { vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -32,7 +32,7 @@ describe("Button component", () => {
 
   it("renders a loading spinner when isLoading is true", () => {
     render(<Button isLoading>Loading button</Button>);
-    const spinner = screen.getByTestId("spinner");
+    const spinner = screen.getByTestId("button-spinner");
     expect(spinner).toBeInTheDocument();
   });
 
