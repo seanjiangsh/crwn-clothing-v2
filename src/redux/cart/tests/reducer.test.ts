@@ -13,31 +13,29 @@ describe("cart reducer", () => {
 
   it("should handle setCartOpened", () => {
     const initialState: types.CartState = { opened: false, items: [] };
-    const { opened } = cartReducer(initialState, cartActions.setCartOpened());
+    const action = cartActions.setCartOpened();
+    const { opened } = cartReducer(initialState, action);
     expect(opened).toBe(true);
   });
 
   it("should handle addCartItem", () => {
     const initialState: types.CartState = { opened: false, items: [] };
-    const { items } = cartReducer(initialState, cartActions.addCartItem(item));
+    const action = cartActions.addCartItem(item);
+    const { items } = cartReducer(initialState, action);
     expect(items[0]).toEqual(item);
   });
 
   it("should handle removeCartItem", () => {
     const initialState: types.CartState = { opened: false, items: [item] };
-    const { items } = cartReducer(
-      initialState,
-      cartActions.removeCartItem(item),
-    );
+    const action = cartActions.removeCartItem(item);
+    const { items } = cartReducer(initialState, action);
     expect(items).not.toContain(item);
   });
 
   it("should handle clearCartItem", () => {
     const initialState: types.CartState = { opened: false, items: [item] };
-    const { items } = cartReducer(
-      initialState,
-      cartActions.clearCartItem(item),
-    );
+    const action = cartActions.clearCartItem(item);
+    const { items } = cartReducer(initialState, action);
     expect(items).toEqual([]);
   });
 });
