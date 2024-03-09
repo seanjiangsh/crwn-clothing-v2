@@ -18,7 +18,7 @@ export default function Checkout() {
   const totalPrice = useSelector(selectCartTotalPrice);
 
   return (
-    <CheckoutContainer>
+    <CheckoutContainer data-testid="checkout">
       <CheckoutHeader>
         <HeaderBlock />
         <HeaderBlock>

@@ -4,7 +4,7 @@ import { AuthenticationContainer } from "./Authentication.styles";
 
 export default function Authentication() {
   return (
-    <AuthenticationContainer>
+    <AuthenticationContainer data-testid="authentication">
       <SignIn />
       <SignUp />
     </AuthenticationContainer>

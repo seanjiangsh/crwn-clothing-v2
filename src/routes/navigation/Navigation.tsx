@@ -24,7 +24,7 @@ export default function Navigation() {
 
   return (
     <React.Fragment>
-      <NavigationContainer>
+      <NavigationContainer data-testid="navigation">
         <LogoContainer to="/">
           <CrwnLogo data-testid="nav-crwn-logo" />
         </LogoContainer>
