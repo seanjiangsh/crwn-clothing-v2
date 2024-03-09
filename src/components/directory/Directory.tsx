@@ -8,7 +8,7 @@ export default function Directory() {
   const { data } = useQuery(getCategories);
 
   return (
-    <DirectoryContainer>
+    <DirectoryContainer data-testid="directory">
       {data?.categories.map(({ id, title, items }) => (
         <DirectoryItem
           key={id}

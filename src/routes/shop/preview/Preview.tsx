@@ -10,7 +10,7 @@ export default function Preview() {
   const { data } = useQuery(getCategories);
 
   return (
-    <React.Fragment>
+    <div data-testid="shop-preview">
       {data ? (
         data.categories.map(({ title, items }) => (
           <PreviewComponent key={title} title={title} products={items} />
@@ -18,6 +18,6 @@ export default function Preview() {
       ) : (
         <Spinner />
       )}
-    </React.Fragment>
+    </div>
   );
 }

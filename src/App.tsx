@@ -25,6 +25,7 @@ export default function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (import.meta.env.MODE === "test") return;
     const unsubscribe = onAuthStateChangedListener((user) => {
       if (user) createUserDocumentFromAuth(user);
       dispatch(userActions.setCurrentUser(user));
@@ -34,6 +35,7 @@ export default function App() {
   }, [dispatch]);
 
   useEffect(() => {
+    if (import.meta.env.MODE === "test") return;
     addCollectionAndDocuments(SHOP_DATA);
   }, []);
 

@@ -10,15 +10,16 @@ export default defineConfig({
     svgr(),
     VitePWA({
       registerType: "autoUpdate",
-      devOptions: {
-        enabled: true,
-      },
+      devOptions: { enabled: true },
     }),
   ],
   test: {
     globals: true,
     environment: "jsdom",
     setupFiles: ["src/vitest.setup.ts"],
-    coverage: { provider: "istanbul" },
+    coverage: {
+      provider: "istanbul",
+      include: ["src/**/*.?(c|m)[jt]s?(x)"],
+    },
   },
 });
