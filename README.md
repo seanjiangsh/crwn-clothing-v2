@@ -1,30 +1,43 @@
-# React + TypeScript + Vite
+# Crown Clothing
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An E-commerce React practicing project, based on [ZTM-Complete React Developer](https://zerotomastery.io/courses/learn-react/) course.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [![cov](https://seanjiangsh.github.io/ztm-crwn-clothing-v2/badges/coverage.svg)](https://github.com/seanjiangsh/ztm-crwn-clothing-v2/actions)
+  [![Netlify Status](https://api.netlify.com/api/v1/badges/ad156783-6720-458c-8809-c47183cb90fe/deploy-status)](https://app.netlify.com/sites/sean-jiang-ztm-crwn-clothing-v2/deploys)
 
-## Expanding the ESLint configuration
+### preview:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+ <img src="assets/preview-cover.png" alt="preview cover" width="50%"/>
 
-- Configure the top-level `parserOptions` property like this:
+### [live demo](https://sean-jiang-ztm-crwn-clothing-v2.netlify.app/)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Available scripts
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+| Script       | Description                                         |
+| ------------ | --------------------------------------------------- |
+| npm dev-sls  | Start the development server with netlify functions |
+| npm build    | Build the production-ready code                     |
+| npm test     | Start testing and watch changes via vitest          |
+| npm coverage | Run tests and get current code coverage             |
+
+## This project utilizes the following technologies:
+
+- [Vite](https://vitejs.dev/): A build tool for modern web development.
+- [TypeScript](https://www.typescriptlang.org/): A typed superset of JavaScript that compiles to plain JavaScript.
+- [React](https://react.dev/): A JavaScript library for building user interfaces.
+- [Redux](https://redux.js.org/): A predictable state container for JavaScript apps.
+- [React Router](https://reactrouter.com/): A library for routing in React applications.
+- [Firebase](https://firebase.google.com/): A cloud-based platform for building web and mobile applications.
+- [Stripe](https://stripe.com/): A payment processing platform for online businesses.
+- [Netlify](https://www.netlify.com/): A cloud computing company that offers hosting and serverless backend services.
+- [GraphQL](https://graphql.org/): A query language for APIs and a runtime for executing those queries with your existing data.
+- [GitHub Actions](https://github.com/features/actions): A CI/CD platform that allows you to automate your software development workflows.
+- [Testing Library](https://testing-library.com/): A set of utilities for testing UI components in a way that resembles how the components are used by end users.
+
+## Special Thanks
+
+- [ZTM](https://zerotomastery.io/): Thanks to these outstanding courses, I gained valuable knowledge throughout the journey.
+- Service and platform providers.
+- All individuals who have contributed packages utilized by this project.
