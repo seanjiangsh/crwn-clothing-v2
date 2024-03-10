@@ -32,7 +32,9 @@ export default function DropDown() {
           <EmptyMessage>Your cart is empty</EmptyMessage>
         )}
       </CartItems>
-      <Button onClick={goToCheckout}>GO TO CHECKOUT</Button>
+      <Button data-testid="drop-down-goto-checkout" onClick={goToCheckout}>
+        GO TO CHECKOUT
+      </Button>
     </CartDropdownContainer>
   );
 }
