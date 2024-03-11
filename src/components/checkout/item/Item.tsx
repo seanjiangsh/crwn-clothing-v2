@@ -14,7 +14,7 @@ import {
 } from "./Item.styles";
 
 export default function Item(cartItem: CartItem) {
-  const { name, imageUrl, price, quantity } = cartItem;
+  const { id, name, imageUrl, price, quantity } = cartItem;
 
   const dispatch = useDispatch();
 
@@ -23,16 +23,22 @@ export default function Item(cartItem: CartItem) {
   const clear = () => dispatch(cartActions.clearCartItem(cartItem));
 
   return (
-    <CheckoutItemContainer>
+    <CheckoutItemContainer data-testid={`checkout-item-container-${id}`}>
       <ImageContainer src={imageUrl} alt={name} />
       <BaseSpan>{name}</BaseSpan>
       <Quantity>
-        <Arrow onClick={remove}>&#10094;</Arrow>
-        <Value>{quantity}</Value>
-        <Arrow onClick={add}>&#10095;</Arrow>
+        <Arrow data-testid="remove" onClick={remove}>
+          &#10094;
+        </Arrow>
+        <Value data-testid="quantity">{quantity}</Value>
+        <Arrow data-testid="add" onClick={add}>
+          &#10095;
+        </Arrow>
       </Quantity>
-      <BaseSpan>{`${price}`}</BaseSpan>
-      <RemoveButton onClick={clear}>&#10005;</RemoveButton>
+      <BaseSpan data-testid="price">{`${price}`}</BaseSpan>
+      <RemoveButton data-testid="clear" onClick={clear}>
+        &#10005;
+      </RemoveButton>
     </CheckoutItemContainer>
   );
 }

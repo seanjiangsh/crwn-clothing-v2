@@ -19,7 +19,7 @@ export default function Checkout() {
 
   return (
     <CheckoutContainer data-testid="checkout">
-      <CheckoutHeader>
+      <CheckoutHeader data-testid="checkout-header">
         <HeaderBlock />
         <HeaderBlock>
           <span>Product</span>
@@ -35,7 +35,7 @@ export default function Checkout() {
       {items.map((item) => {
         return <Item key={item.id} {...item} />;
       })}
-      <Total>{`Total: ${totalPrice}`}</Total>
+      <Total data-testid="checkout-total">{`Total: ${totalPrice}`}</Total>
       <PaymentForm />
     </CheckoutContainer>
   );
