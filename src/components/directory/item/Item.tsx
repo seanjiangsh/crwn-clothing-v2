@@ -14,8 +14,11 @@ export default function DirectoryItem(props: DirectoryItemProps) {
   const onClick = () => navigate(route);
 
   return (
-    <DirectoryItemContainer onClick={onClick}>
-      <BackgroundImage imageurl={imageUrl} />
+    <DirectoryItemContainer
+      data-testid={`directory-item-${title}`}
+      onClick={onClick}
+    >
+      <BackgroundImage data-testid="directory-item-image" imageurl={imageUrl} />
       <Body>
         <h2>{title}</h2>
         <p>Shop Now</p>
