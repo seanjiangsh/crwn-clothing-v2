@@ -37,12 +37,19 @@ export default function SignIn() {
     [email, password],
   );
 
-  const onChange = useCallback(
+  const onEmailChange = useCallback(
     (ev: React.ChangeEvent<HTMLInputElement>) => {
-      const { id, value } = ev.target;
-      const field = id.split("-").at(-1);
-      if (!field || !Object.keys(formFields).includes(field)) return;
-      const newFields = { ...formFields, [field]: value };
+      const { value } = ev.target;
+      const newFields = { ...formFields, email: value };
+      setFormFields(newFields);
+    },
+    [formFields],
+  );
+
+  const onPasswordChange = useCallback(
+    (ev: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = ev.target;
+      const newFields = { ...formFields, password: value };
       setFormFields(newFields);
     },
     [formFields],
@@ -59,7 +66,7 @@ export default function SignIn() {
           type="email"
           required
           value={email}
-          onChange={onChange}
+          onChange={onEmailChange}
         />
         <FormInput
           id="sign-in-input-password"
@@ -67,7 +74,7 @@ export default function SignIn() {
           type="password"
           required
           value={password}
-          onChange={onChange}
+          onChange={onPasswordChange}
         />
         <ButtonsContainer>
           <Button type="submit" disabled={disableSubmit}>

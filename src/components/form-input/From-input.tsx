@@ -8,14 +8,16 @@ type FormInputProps = {
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 export default function FormInput(props: FormInputProps) {
-  const { label, ...otherProps } = props;
+  const { id, label, ...otherProps } = props;
   const value = String(otherProps.value);
   const shrink = value.length ? "true" : undefined;
 
   return (
     <Group>
-      <Input {...otherProps} />
-      <InputLabel shrink={shrink}>{label}</InputLabel>
+      <Input id={id} data-testid={id} {...otherProps} />
+      <InputLabel htmlFor={id} shrink={shrink}>
+        {label}
+      </InputLabel>
     </Group>
   );
 }
