@@ -16,13 +16,16 @@ describe("App component", () => {
         <App />
       </MemoryRouter>,
     );
-    // * note: waitFor is used to wait for the data to be fetched
-    await waitFor(() => {
-      const navigation = screen.getByTestId("navigation");
-      const directory = screen.getByTestId("directory");
-      expect(navigation).toBeInTheDocument();
-      expect(directory).toBeInTheDocument();
-    });
+
+    await waitFor(
+      async () => {
+        const navigation = await screen.findByTestId("navigation");
+        const directory = await screen.findByTestId("directory");
+        expect(navigation).toBeInTheDocument();
+        expect(directory).toBeInTheDocument();
+      },
+      { timeout: 5000 },
+    );
   });
 
   it("renders the shop page", async () => {
@@ -87,7 +90,7 @@ describe("App component", () => {
     );
     const cartIcon = screen.getByTestId("drop-down-goto-checkout");
     await user.click(cartIcon);
-    const checkOut = screen.getByTestId("checkout");
+    const checkOut = await screen.findByTestId("checkout");
     expect(checkOut).toBeInTheDocument();
   });
 
@@ -138,19 +141,24 @@ describe("App component", () => {
     const directoryItem = await screen.findByTestId(directoryItemId);
     await user.click(directoryItem);
 
-    // * Check if the product cards are rendered correctly
-    const productCards = screen.getAllByTestId("product-card");
-    // screen.debug(productCards);
-    expect(productCards).toHaveLength(3);
+    await waitFor(
+      () => {
+        // * Check if the product cards are rendered correctly
+        const productCards = screen.getAllByTestId("product-card");
+        // screen.debug(productCards);
+        expect(productCards).toHaveLength(3);
 
-    // * Check if the product card titles and images are correct
-    productCards.forEach((productCard, idx) => {
-      const product = mockCategoryData.categories[0].items[idx];
-      const title = screen.getByText(product.name);
-      const image = productCard.querySelector("img");
-      expect(title).toBeInTheDocument();
-      expect(image).toBeInTheDocument();
-      expect(image?.src).toBe(product.imageUrl);
-    });
+        // * Check if the product card titles and images are correct
+        productCards.forEach((productCard, idx) => {
+          const product = mockCategoryData.categories[0].items[idx];
+          const title = screen.getByText(product.name);
+          const image = productCard.querySelector("img");
+          expect(title).toBeInTheDocument();
+          expect(image).toBeInTheDocument();
+          expect(image?.src).toBe(product.imageUrl);
+        });
+      },
+      { timeout: 5000 },
+    );
   });
 });

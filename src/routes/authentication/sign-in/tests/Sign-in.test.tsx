@@ -8,6 +8,8 @@ import SignIn from "../Sign-in";
 
 describe("SignIn component", () => {
   const user = userEvent.setup();
+  const alertSpy = vi.spyOn(window, "alert");
+  alertSpy.mockImplementation(() => {});
 
   beforeEach(() => {
     render(<SignIn />);
@@ -53,7 +55,6 @@ describe("SignIn component", () => {
       "signInAuthUserWithEmailAndPassword",
     );
     loginSpy.mockImplementation(() => Promise.reject({} as UserCredential));
-    const alertSpy = vi.spyOn(window, "alert");
 
     const emailInput = screen.getByTestId("sign-in-input-email");
     const passwordInput = screen.getByTestId("sign-in-input-password");
