@@ -34,12 +34,37 @@ export default function SignUp() {
     !confirmPassword ||
     password !== confirmPassword;
 
-  const onChange = useCallback(
+  const onDisplayNameChange = useCallback(
     (ev: React.ChangeEvent<HTMLInputElement>) => {
-      const { id, value } = ev.target;
-      const field = id.split("-").at(-1);
-      if (!field || !Object.keys(formFields).includes(field)) return;
-      const newFields = { ...formFields, [field]: value };
+      const { value } = ev.target;
+      const newFields = { ...formFields, displayName: value };
+      setFormFields(newFields);
+    },
+    [formFields],
+  );
+
+  const onEmailChange = useCallback(
+    (ev: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = ev.target;
+      const newFields = { ...formFields, email: value };
+      setFormFields(newFields);
+    },
+    [formFields],
+  );
+
+  const onPasswordChange = useCallback(
+    (ev: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = ev.target;
+      const newFields = { ...formFields, password: value };
+      setFormFields(newFields);
+    },
+    [formFields],
+  );
+
+  const onConfirmPasswordChange = useCallback(
+    (ev: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = ev.target;
+      const newFields = { ...formFields, confirmPassword: value };
       setFormFields(newFields);
     },
     [formFields],
@@ -62,7 +87,7 @@ export default function SignUp() {
   );
 
   return (
-    <SignUpContainer>
+    <SignUpContainer data-testid="sign-up">
       <h2>I do not have an account</h2>
       <span>Sign up with your email and passrowd</span>
       <form onSubmit={onSubmit}>
@@ -72,7 +97,7 @@ export default function SignUp() {
           type="text"
           required
           value={displayName}
-          onChange={onChange}
+          onChange={onDisplayNameChange}
         />
         <FormInput
           id="sign-up-input-email"
@@ -80,7 +105,7 @@ export default function SignUp() {
           type="email"
           required
           value={email}
-          onChange={onChange}
+          onChange={onEmailChange}
         />
         <FormInput
           id="sign-up-input-password"
@@ -88,7 +113,7 @@ export default function SignUp() {
           type="password"
           required
           value={password}
-          onChange={onChange}
+          onChange={onPasswordChange}
         />
         <FormInput
           id="sign-up-input-confirmPassword"
@@ -96,7 +121,7 @@ export default function SignUp() {
           type="password"
           required
           value={confirmPassword}
-          onChange={onChange}
+          onChange={onConfirmPasswordChange}
         />
         <Button type="submit" disabled={disableSubmit}>
           Submit
