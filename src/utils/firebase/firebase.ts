@@ -123,12 +123,3 @@ export const getCategoriesAndDocuments = async (): Promise<Array<Category>> => {
   const categories = querySnapshot.docs.map((d) => d.data() as Category);
   return categories;
 };
-
-export const getCurrentUser = (): Promise<User | null> =>
-  new Promise((resolve, reject) => {
-    const nextFn = (user: User | null) => {
-      unsubscribe();
-      resolve(user);
-    };
-    const unsubscribe = onAuthStateChanged(auth, nextFn, reject);
-  });

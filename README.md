@@ -1,9 +1,10 @@
 # Crown Clothing
 
-An E-commerce React practicing project, based on [ZTM-Complete React Developer](https://zerotomastery.io/courses/learn-react/) course.
+A React project focused on practicing E-commerce functionalities, based on [ZTM-Complete React Developer](https://zerotomastery.io/courses/learn-react/) course.
 
 ---
 
+[![Test workflow](https://github.com/seanjiangsh/ztm-crwn-clothing-v2/actions/workflows/test.yml/badge.svg)](https://github.com/seanjiangsh/ztm-crwn-clothing-v2/actions/workflows/test.yml)
 [![cov](https://seanjiangsh.github.io/ztm-crwn-clothing-v2/badges/coverage.svg)](https://github.com/seanjiangsh/ztm-crwn-clothing-v2/actions)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ad156783-6720-458c-8809-c47183cb90fe/deploy-status)](https://app.netlify.com/sites/sean-jiang-ztm-crwn-clothing-v2/deploys)
 
