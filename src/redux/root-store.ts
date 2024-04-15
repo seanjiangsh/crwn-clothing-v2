@@ -10,8 +10,14 @@ import { createLogger } from "redux-logger";
 
 import { rootReducer } from "./root-reducer";
 
-const logger = createLogger({ duration: true, collapsed: true });
-const middlewares: Array<Middleware> = import.meta.env.DEV ? [logger] : [];
+export const logger = createLogger({ duration: true, collapsed: true });
+console.log({ import: import.meta.env.DEV });
+
+export const getMiddleware = (isDev: boolean) => {
+  const middlewares: Array<Middleware> = isDev ? [logger] : [];
+  return middlewares;
+};
+const middlewares = getMiddleware(import.meta.env.DEV);
 
 const persistWhitelist = ["cart"];
 const persistedReducer = persistReducer(

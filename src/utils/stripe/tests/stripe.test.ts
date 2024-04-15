@@ -58,4 +58,32 @@ describe("Stripe Util createCardPayment", () => {
     expect(paymentIntentSpy).toHaveBeenCalledTimes(1);
     expect(confirmCardPayment).toHaveBeenCalledTimes(0);
   });
+
+  it("should return false and log error if result has error", async () => {
+    // Mock the client_secret response
+    const paymentIntentSpy = vi.spyOn(window, "fetch");
+    paymentIntentSpy.mockImplementation(
+      () =>
+        Promise.resolve({
+          json: () => Promise.resolve({ client_secret: "client_secret" }),
+        }) as any,
+    );
+    // Mock the Stripe API call
+    const paymentResult = {
+      paymentIntent: { status: "failed" },
+      error: "test error",
+    };
+    const confirmCardPayment = vi.fn(() => Promise.resolve(paymentResult));
+    const stripe = { confirmCardPayment } as unknown as Stripe;
+    // Spy on the console error
+    const consoleErrorSpy = vi.spyOn(console, "error");
+
+    const args = { totalPrice, user, stripe, card };
+    const result = await createCardPayment(args);
+
+    expect(result).toEqual(false);
+    expect(paymentIntentSpy).toHaveBeenCalledTimes(1);
+    expect(confirmCardPayment).toHaveBeenCalledTimes(1);
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+  });
 });
