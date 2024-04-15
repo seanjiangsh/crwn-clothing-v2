@@ -1,3 +1,4 @@
+import { vi } from "vitest";
 import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
@@ -6,6 +7,31 @@ import { MockedProvider as ApolloMockProvider } from "@apollo/client/testing";
 import { renderWithProviders } from "../utils/tests/utils-for-tests";
 import { getCategories } from "../utils/graphql/query/categories";
 import App from "../App";
+
+vi.mock("firebase/auth", async () => {
+  const firebase = await vi.importActual("firebase/auth");
+  return {
+    ...firebase,
+    onAuthStateChanged: vi.fn(),
+  };
+});
+
+vi.mock("firebase/firestore", async () => {
+  const actual = await vi.importActual("firebase/firestore");
+  return {
+    ...actual,
+    doc: vi.fn(() => ({})),
+    getDoc: vi.fn(() => Promise.resolve({ exists: () => false })),
+    getDocs: vi.fn(() => ({ empty: true })),
+    setDoc: vi.fn(() => Promise.resolve()),
+    writeBatch: vi.fn(() => ({
+      set: vi.fn(() => {}),
+      commit: vi.fn(() => Promise.resolve()),
+    })),
+    collection: vi.fn(() => ({})),
+    query: vi.fn(() => ({})),
+  };
+});
 
 describe("App component", () => {
   const user = userEvent.setup();

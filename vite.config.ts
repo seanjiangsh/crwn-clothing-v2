@@ -21,7 +21,7 @@ export default defineConfig({
       provider: "istanbul",
       reporter: ["text", "html", "clover", "json", "json-summary"],
       include: ["src/**/*.?(c|m)[jt]s?(x)"],
-      exclude: ["src/utils/graphql/types"],
+      exclude: ["src/utils/graphql/types", "src/main.tsx"],
     },
   },
 });
