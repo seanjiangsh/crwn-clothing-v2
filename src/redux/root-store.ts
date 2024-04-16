@@ -11,7 +11,6 @@ import { createLogger } from "redux-logger";
 import { rootReducer } from "./root-reducer";
 
 export const logger = createLogger({ duration: true, collapsed: true });
-console.log({ import: import.meta.env.DEV });
 
 export const getMiddleware = (isDev: boolean) => {
   const middlewares: Array<Middleware> = isDev ? [logger] : [];

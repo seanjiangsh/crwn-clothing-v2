@@ -1,0 +1,19 @@
+service: crwn-clothing-serverless-api
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-west-2
+
+functions:
+  graphql:
+    handler: graphql/index.handler
+    events:
+      - httpApi:
+          path: /graphql
+          method: "*"
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript
