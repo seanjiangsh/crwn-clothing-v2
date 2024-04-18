@@ -12,6 +12,7 @@
     "apollo-server-lambda": "^3.13.0"
   },
   "devDependencies": {
+    "serverless": "^3.38.0",
     "serverless-offline": "^13.3.3",
     "serverless-plugin-typescript": "1.1.7"
   }

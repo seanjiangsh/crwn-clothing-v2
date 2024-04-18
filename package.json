@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "install": "npm i && cd aws && npm i && cd ..",
     "dev": "vite",
     "sls": "npm run dev ---prefix aws",
     "dev-sls": "concurrently \"npm run sls\" \"npm run gql-codegen\" \"npm run dev\"",
@@ -15,7 +14,8 @@
     "preview": "vite preview",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "deploy-sls": "npm run deploy --prefix aws"
+    "install-sls": "npm install --prefix aws",
+    "deploy-sls": "npm run install-sls && npm run deploy --prefix aws"
   },
   "dependencies": {
     "@apollo/client": "3.9.6",

@@ -1,4 +1,4 @@
-service: crwn-clothing-serverless-api
+service: crwn-clothing
 frameworkVersion: "3"
 
 provider:
