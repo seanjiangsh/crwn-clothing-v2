@@ -10,8 +10,8 @@ declare module "*.svg" {
 }
 
 interface ImportMetaEnv {
+  readonly VITE_NETLIFY_ENV: string | undefined;
   readonly VITE_STRIPE_PUBLISHABLE_KEY: string;
-  readonly VITE_PUBLISHED_GRAPHQL_ENDPOINT: string;
 }
 
 interface ImportMeta {

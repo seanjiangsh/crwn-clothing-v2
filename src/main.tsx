@@ -13,12 +13,8 @@ import { loadStripePromise } from "./utils/stripe/stripe.ts";
 import { apolloClient } from "./utils/graphql/apollo/apollo.tsx";
 import App from "./App.tsx";
 
-const { VITE_STRIPE_PUBLISHABLE_KEY, VITE_PUBLISHED_GRAPHQL_ENDPOINT } =
-  import.meta.env;
-console.log({
-  VITE_STRIPE_PUBLISHABLE_KEY,
-  VITE_PUBLISHED_GRAPHQL_ENDPOINT,
-});
+import.meta.env;
+console.log(import.meta.env);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
