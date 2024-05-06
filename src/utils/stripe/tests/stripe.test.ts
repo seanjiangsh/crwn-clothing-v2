@@ -30,7 +30,7 @@ describe("Stripe Util createCardPayment", () => {
     expect(result).toEqual(true);
     expect(paymentIntentSpy).toHaveBeenCalledTimes(1);
     expect(paymentIntentSpy).toHaveBeenCalledWith(
-      "/.netlify/functions/create-payment-intent",
+      "/api/create-payment-intent",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

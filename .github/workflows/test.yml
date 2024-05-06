@@ -1,21 +1,32 @@
 name: Test workflow
+
 on:
   push:
     branches: ["**"]
   pull_request:
     branches: [main]
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "latest"
+
       - name: Install packages
         run: npm install
+
       - name: Build code
         run: npm run build
+
       - name: Run tests and coverage
         run: npm run coverage
+
       - name: Update Coverage Badge
         if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         uses: we-cli/coverage-badge-action@main
