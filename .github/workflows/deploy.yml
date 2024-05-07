@@ -19,7 +19,13 @@ jobs:
         with:
           node-version: "latest"
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
+        run: npm install
+
+      - name: Build frontend code
+        run: npm run build
+
+      - name: Install serverless dependencies
         run: npm run install-sls
 
       - name: Deploy to AWS
