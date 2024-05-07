@@ -7,8 +7,10 @@ import {
 } from "@stripe/stripe-js";
 import { User } from "firebase/auth";
 
-const { DEV, VITE_NETLIFY_ENV, VITE_STRIPE_PUBLISHABLE_KEY } = import.meta.env;
-export const loadStripePromise = loadStripe(VITE_STRIPE_PUBLISHABLE_KEY);
+const { DEV, VITE_NETLIFY_ENV } = import.meta.env;
+const STRIPE_PUBLISHABLE_KEY =
+  "pk_test_51HPd44DGvQwgB8HFNHHN6yuoOWTkbQR8h6TDgRgB4AzLdl199vNOyY7jdL9en9jHHZk5WVNnuJwWlV3ZhU3R30O100v8MupaEG";
+export const loadStripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
 const createPaymentIntentUrl = DEV
   ? "http://localhost:3000/api/create-payment-intent"
