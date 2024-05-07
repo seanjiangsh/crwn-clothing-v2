@@ -16,6 +16,7 @@ describe("Stripe Util createCardPayment", () => {
     paymentIntentSpy.mockImplementation(
       () =>
         Promise.resolve({
+          ok: true,
           json: () => Promise.resolve({ client_secret: "client_secret" }),
         }) as any,
     );
@@ -30,7 +31,7 @@ describe("Stripe Util createCardPayment", () => {
     expect(result).toEqual(true);
     expect(paymentIntentSpy).toHaveBeenCalledTimes(1);
     expect(paymentIntentSpy).toHaveBeenCalledWith(
-      "/.netlify/functions/create-payment-intent",
+      "http://localhost:3000/api/create-payment-intent",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -65,6 +66,7 @@ describe("Stripe Util createCardPayment", () => {
     paymentIntentSpy.mockImplementation(
       () =>
         Promise.resolve({
+          ok: true,
           json: () => Promise.resolve({ client_secret: "client_secret" }),
         }) as any,
     );
