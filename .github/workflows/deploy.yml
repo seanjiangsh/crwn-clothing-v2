@@ -2,14 +2,14 @@ name: Deploy to AWS
 
 on:
   workflow_run:
-    workflows: ["Test workflow"]
+    workflows: ["PR Merged"]
     types:
       - completed
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
