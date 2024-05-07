@@ -60,6 +60,31 @@ describe("Stripe Util createCardPayment", () => {
     expect(confirmCardPayment).toHaveBeenCalledTimes(0);
   });
 
+  it("should return false if response doesn't contain 'client_secret'", async () => {
+    // Mock the client_secret response
+    const paymentIntentSpy = vi.spyOn(window, "fetch");
+    paymentIntentSpy.mockImplementation(
+      () =>
+        Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({}),
+        }) as any,
+    );
+    // Mock the Stripe API call
+    const paymentResult = {
+      paymentIntent: { status: "failed" },
+      error: "test error",
+    };
+    const confirmCardPayment = vi.fn(() => Promise.resolve(paymentResult));
+    const stripe = { confirmCardPayment } as unknown as Stripe;
+
+    const args = { totalPrice, user, stripe, card };
+    const result = await createCardPayment(args);
+
+    expect(result).toEqual(false);
+    expect(paymentIntentSpy).toHaveBeenCalledTimes(1);
+  });
+
   it("should return false and log error if result has error", async () => {
     // Mock the client_secret response
     const paymentIntentSpy = vi.spyOn(window, "fetch");
