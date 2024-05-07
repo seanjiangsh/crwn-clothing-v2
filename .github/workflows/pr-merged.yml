@@ -1,0 +1,17 @@
+name: PR Merged
+
+on:
+  pull_request:
+    types:
+      - closed
+  workflow_run:
+    workflows: ["Test Workflow"]
+    types:
+      - completed
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' && github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - run: echo "PR was merged into main"
