@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "cross-env ARC_HTTP_PORT=3000 arc sandbox",
-    "deploy": "arc deploy",
+    "deploy": "arc deploy --production --prune",
     "remove": "arc destroy --app architect-test --force"
   },
   "dependencies": {
