@@ -3,15 +3,14 @@ name: Deploy to AWS
 # This workflow is triggered when the "Test workflow" completes
 on:
   workflow_run:
-    workflows: ["Test workflow"]
+    workflows: ["Test Workflow"]
     types:
       - completed
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # This job only runs if the "Test workflow" was successful
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
     steps:
       # This step checks if the workflow was triggered by a push to the main branch
       - name: Check branch
