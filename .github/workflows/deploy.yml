@@ -1,5 +1,6 @@
 name: Deploy to AWS
 
+# This workflow is triggered when the "Test workflow" completes
 on:
   workflow_run:
     workflows: ["Test Workflow"]
@@ -11,6 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
     steps:
+      # This step checks if the workflow was triggered by a push to the main branch
+      - name: Check branch
+        run: exit 1
+        if: ${{ github.event.workflow_run.head_branch != 'main' }}
+
       - name: Checkout code
         uses: actions/checkout@v4
 
