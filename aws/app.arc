@@ -1,5 +1,5 @@
 @app
-architect-test
+crwn-clothing
 
 @aws
 region ap-northeast-1
