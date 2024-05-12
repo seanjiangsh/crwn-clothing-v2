@@ -4,7 +4,7 @@ import { expressMiddleware } from "@apollo/server/express4";
 import cors from "cors";
 
 import apolloserver from "./graphql";
-import { createPaymentIntent } from "./stripe/controllers";
+import { createPaymentIntent } from "./stripe";
 
 const isDev = process.env.ARC_ENV === "testing";
 
