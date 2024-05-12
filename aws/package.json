@@ -2,12 +2,15 @@
   "name": "crwn-clothing-lambda",
   "version": "1.0.0",
   "scripts": {
-    "dev": "cross-env ARC_HTTP_PORT=3000 arc sandbox",
+    "dev": "arc sandbox -p 3000",
     "deploy": "arc deploy --production --prune",
-    "remove": "arc destroy --app architect-test --force"
+    "remove": "arc destroy --app crwn-clothing --production --force"
   },
   "dependencies": {
+    "@apollo/server": "^4.10.4",
+    "@codegenie/serverless-express": "^4.14.1",
     "apollo-server-lambda": "^3.13.0",
+    "cors": "^2.8.5",
     "crwn-clothing-v2": "file:..",
     "stripe": "^15.5.0"
   },
@@ -21,7 +24,6 @@
     "@types/architect__functions": "^3.13.11",
     "@types/aws-lambda": "^8.10.93",
     "@types/node": "20.12.11",
-    "cross-env": "^7.0.3",
     "dotenv": "^16.4.5"
   }
 }

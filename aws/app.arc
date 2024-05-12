@@ -5,13 +5,14 @@ crwn-clothing
 region ap-northeast-1
 runtime typescript
 
+@http
+/*
+  method any
+  src /src/api
+
 @static
 spa true
 folder ../dist
-
-@http
-post /api/create-payment-intent
-any /api/graphql
 
 @plugins
 architect/plugin-typescript
