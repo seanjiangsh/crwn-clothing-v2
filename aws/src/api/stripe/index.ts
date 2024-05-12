@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
+import { Router, Request, Response } from "express";
 import Stripe from "stripe";
 
-export const createPaymentIntent = async (req: Request, res: Response) => {
+const createPaymentIntent = async (req: Request, res: Response) => {
   const { STRIPE_SECRET_KEY } = process.env;
   if (!STRIPE_SECRET_KEY) {
     console.error("cannot find STRIPE_SECRET_KEY");
@@ -23,3 +23,8 @@ export const createPaymentIntent = async (req: Request, res: Response) => {
     return res.status(500).send("Internal server error");
   }
 };
+
+const stripeRouter = Router();
+stripeRouter.post("/", createPaymentIntent);
+
+export default stripeRouter;

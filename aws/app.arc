@@ -14,6 +14,5 @@ folder ../dist
   method any
   src /src/api
 
-
 @plugins
 architect/plugin-typescript

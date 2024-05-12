@@ -1,18 +1,16 @@
 import express from "express";
 import serverlessExpress from "@codegenie/serverless-express";
-import { expressMiddleware } from "@apollo/server/express4";
 import cors from "cors";
 
-import apolloserver from "./graphql";
-import { createPaymentIntent } from "./stripe";
+import apolloServer from "./graphql";
+import stripeRouter from "./stripe";
 
 const isDev = process.env.ARC_ENV === "testing";
 
 // * routers
 const apiRouter = express.Router();
-apolloserver.startInBackgroundHandlingStartupErrorsByLoggingAndFailingAllRequests();
-apiRouter.use("/graphql", expressMiddleware(apolloserver));
-apiRouter.post("/create-payment-intent", createPaymentIntent);
+apiRouter.use("/graphql", apolloServer);
+apiRouter.use("/create-payment-intent", stripeRouter);
 apiRouter.get("/health", (req, res) => res.send("ok"));
 
 // * api server

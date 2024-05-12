@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "arc sandbox -p 3000",
-    "deploy": "arc deploy --production --prune",
+    "deploy": "arc deploy --production",
     "remove": "arc destroy --app crwn-clothing --production --force"
   },
   "dependencies": {
