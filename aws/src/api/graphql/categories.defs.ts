@@ -15,6 +15,5 @@ export const typeDefs = gql`
     id: ID!
     name: String!
     price: Float!
-    imageUrl: String!
   }
 `;

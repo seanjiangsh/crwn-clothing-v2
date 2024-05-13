@@ -9,7 +9,6 @@ export const getCategories = gql(/* GraphQL */ `
         id
         name
         price
-        imageUrl
       }
     }
   }
@@ -24,7 +23,6 @@ export const getCategoryById = gql(/* GraphQL */ `
         id
         name
         price
-        imageUrl
       }
     }
   }
@@ -39,7 +37,6 @@ export const getCategoryByTitle = gql(/* GraphQL */ `
         id
         name
         price
-        imageUrl
       }
     }
   }
