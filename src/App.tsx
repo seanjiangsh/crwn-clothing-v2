@@ -4,11 +4,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch } from "./redux/root-hook";
 import { userActions } from "./redux/user/reducer";
 import {
-  addCollectionAndDocuments,
   createUserDocumentFromAuth,
   onAuthStateChangedListener,
 } from "./utils/firebase/firebase";
-import SHOP_DATA from "./shop-data";
 
 import Spinner from "./components/spinner/Spinner";
 import GlobalStyle from "./global.styles";
@@ -32,10 +30,6 @@ export default function App() {
 
     return unsubscribe;
   }, [dispatch]);
-
-  useEffect(() => {
-    addCollectionAndDocuments(SHOP_DATA);
-  }, []);
 
   return (
     <Suspense fallback={<Spinner />}>

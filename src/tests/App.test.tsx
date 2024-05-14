@@ -95,14 +95,14 @@ describe("App component", () => {
             id: "cjwuuj5ip000j0719taw0mjdz",
             name: "Brown Brim",
             price: 25,
-            imageUrl: "https://i.ibb.co/ZYW3VTp/brown-brim.png",
+            imageUrl: "/assets/images/hats/cjwuuj5ip000j0719taw0mjdz.png",
             quantity: 1,
           },
           {
             id: "cjwuuj5j4000l0719l3ialwkj",
             name: "Blue Beanie",
             price: 18,
-            imageUrl: "https://i.ibb.co/ypkgK0X/blue-beanie.png",
+            imageUrl: "/assets/images/hats/cjwuuj5j4000l0719l3ialwkj.png",
             quantity: 2,
           },
         ],
@@ -120,30 +120,32 @@ describe("App component", () => {
     expect(checkOut).toBeInTheDocument();
   });
 
-  it("navigates to the /shop/jacket page and render product cards when the jacket directory is clicked", async () => {
+  it("navigates to the /shop/hats page and render product cards when the hats directory is clicked", async () => {
     const mockCategoryData = {
       categories: [
         {
           id: "cjwuun2fa001907195roo7iyk",
-          title: "Jackets",
+          title: "Hats",
           items: [
             {
-              id: "cjwuun2fp001a0719thf91fzq",
-              name: "Black Jean Shearling",
-              price: 125,
-              imageUrl: "https://i.ibb.co/XzcwL5s/black-shearling.png",
+              id: "cjwuuj5ip000j0719taw0mjdz",
+              name: "Brown Brim",
+              price: 25,
+              imageUrl: "/assets/images/hats/cjwuuj5ip000j0719taw0mjdz.png",
+              quantity: 1,
             },
             {
               id: "cjwuuj5j4000l0719l3ialwkj",
               name: "Blue Beanie",
               price: 18,
-              imageUrl: "https://i.ibb.co/ypkgK0X/blue-beanie.png",
+              imageUrl: "/assets/images/hats/cjwuuj5j4000l0719l3ialwkj.png",
+              quantity: 2,
             },
             {
               id: "cjwuuj5je000n0719ch6nbhik",
               name: "Brown Cowboy",
               price: 35,
-              imageUrl: "https://i.ibb.co/QdJwgmp/brown-cowboy.png",
+              imageUrl: "/assets/images/hats/cjwuuj5je000n0719ch6nbhik.png",
             },
           ],
         },
@@ -181,7 +183,7 @@ describe("App component", () => {
           const image = productCard.querySelector("img");
           expect(title).toBeInTheDocument();
           expect(image).toBeInTheDocument();
-          expect(image?.src).toBe(product.imageUrl);
+          expect(image?.src).toContain(product.imageUrl);
         });
       },
       { timeout: 5000 },

@@ -27,7 +27,6 @@ vi.mock("firebase/firestore", async () => {
     ...actual,
     doc: vi.fn(() => ({})),
     getDoc: vi.fn(() => Promise.resolve({ exists: () => false })),
-    getDocs: vi.fn(() => ({ empty: true })),
     setDoc: vi.fn(() => Promise.resolve()),
     writeBatch: vi.fn(() => ({
       set: vi.fn(() => {}),
@@ -81,17 +80,6 @@ describe("Firebase Utils", () => {
       const spy = vi.spyOn(firebaseAuth, "signOut");
       await firebaseUtils.signOutUser();
       expect(spy).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe("addCollectionAndDocuments", () => {
-    it("should call correct firebase/store functions", async () => {
-      const shopdata = [{ title: "test", items: [] }];
-      const getDocsSpy = vi.spyOn(firebaseFirestore, "getDocs");
-      const writeBatchSpy = vi.spyOn(firebaseFirestore, "writeBatch");
-      await firebaseUtils.addCollectionAndDocuments(shopdata);
-      expect(getDocsSpy).toHaveBeenCalledTimes(1);
-      expect(writeBatchSpy).toHaveBeenCalledTimes(1);
     });
   });
 });

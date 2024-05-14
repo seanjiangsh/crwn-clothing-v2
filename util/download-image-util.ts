@@ -245,13 +245,13 @@ export const oldCategories = [
   },
 ];
 
-const assetDir = "assets";
+const imageDir = "public/assets/images";
 oldCategories.forEach((category) => {
   const { title, items } = category;
-  const dir = `${assetDir}/${title}`;
+  const dir = `${imageDir}/${title.toLowerCase()}`;
 
   // Create directory if it doesn't exist
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
   items.forEach((item) => {
     const { id, imageUrl } = item;

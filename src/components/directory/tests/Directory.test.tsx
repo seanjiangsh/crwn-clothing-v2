@@ -4,6 +4,7 @@ import { MockedProvider as ApolloMockProvider } from "@apollo/client/testing";
 import Directory from "../Directory";
 import { getCategories } from "../../../utils/graphql/query/categories";
 import { MemoryRouter } from "react-router-dom";
+import { getImageUrl } from "../../../utils/misc/misc";
 
 const mockCategoryData = {
   categories: [
@@ -15,13 +16,11 @@ const mockCategoryData = {
           id: "cjwuuj5ip000j0719taw0mjdz",
           name: "Brown Brim",
           price: 25,
-          imageUrl: "https://i.ibb.co/ZYW3VTp/brown-brim.png",
         },
         {
           id: "cjwuuj5j4000l0719l3ialwkj",
           name: "Blue Beanie",
           price: 18,
-          imageUrl: "https://i.ibb.co/ypkgK0X/blue-beanie.png",
         },
       ],
     },
@@ -33,13 +32,11 @@ const mockCategoryData = {
           id: "cjwuun2fp001a0719thf91fzq",
           name: "Black Jean Shearling",
           price: 125,
-          imageUrl: "https://i.ibb.co/XzcwL5s/black-shearling.png",
         },
         {
           id: "cjwuun2na001c0719ovsfpdjt",
           name: "Blue Jean Jacket",
           price: 90,
-          imageUrl: "https://i.ibb.co/mJS6vz0/blue-jean-jacket.png",
         },
       ],
     },
@@ -68,17 +65,19 @@ describe("Directory component", () => {
     const { categories } = mockCategoryData;
 
     categories.forEach((category) => {
+      const { title, items } = category;
       // * Check if the directory item is rendered correctly
-      const id = `directory-item-${category.title}`;
+      const id = `directory-item-${title}`;
       const directoryItem = screen.getByTestId(id);
       expect(directoryItem).toBeInTheDocument();
       // screen.debug(directoryItem);
       // * Check if the directory item titles and images are correct
-      const titleElem = screen.getByText(category.title);
+      const titleElem = screen.getByText(title);
       const imageElem = getByTestId(directoryItem, "directory-item-image");
       expect(titleElem).toBeInTheDocument();
       expect(imageElem).toBeInTheDocument();
-      const style = `background-image: url(${category.items[0].imageUrl})`;
+      const imageUrl = getImageUrl(title, items[0].id);
+      const style = `background-image: url(${imageUrl})`;
       expect(imageElem).toHaveStyle(style);
     });
   });

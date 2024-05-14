@@ -14,14 +14,14 @@ describe("Cart Selectors", () => {
       id: "cjwuuj5ip000j0719taw0mjdz",
       name: "Brown Brim",
       price: 25,
-      imageUrl: "https://i.ibb.co/ZYW3VTp/brown-brim.png",
+      imageUrl: "/assets/images/hats/cjwuuj5ip000j0719taw0mjdz.png",
       quantity: 1,
     },
     {
       id: "cjwuuj5j4000l0719l3ialwkj",
       name: "Blue Beanie",
       price: 18,
-      imageUrl: "https://i.ibb.co/ypkgK0X/blue-beanie.png",
+      imageUrl: "/assets/images/hats/cjwuuj5j4000l0719l3ialwkj.png",
       quantity: 2,
     },
   ];

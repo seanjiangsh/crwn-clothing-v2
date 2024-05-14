@@ -7,7 +7,7 @@ describe("cart reducer", () => {
     id: "cjwuuj5ip000j0719taw0mjdz",
     name: "Brown Brim",
     price: 25,
-    imageUrl: "https://i.ibb.co/ZYW3VTp/brown-brim.png",
+    imageUrl: "/assets/images/hats/cjwuuj5ip000j0719taw0mjdz.png",
     quantity: 1,
   };
 

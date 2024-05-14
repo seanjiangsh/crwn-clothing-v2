@@ -22,7 +22,6 @@ vi.mock("firebase/firestore", async () => {
   return {
     ...actual,
     getDoc: vi.fn(() => Promise.resolve({ exists: () => true })),
-    getDocs: vi.fn(() => ({ empty: false })),
     writeBatch: vi.fn(() => ({
       set: vi.fn(() => {}),
       commit: vi.fn(() => Promise.resolve()),
@@ -31,17 +30,6 @@ vi.mock("firebase/firestore", async () => {
 });
 
 describe("Firebase Utils", () => {
-  describe("addCollectionAndDocuments", () => {
-    it("should call firebase/store 'getDocs' but not 'writeBatch' if shopdata exists", async () => {
-      const shopdata = [{ title: "test", items: [] }];
-      const getDocsSpy = vi.spyOn(firebaseFirestore, "getDocs");
-      const writeBatchSpy = vi.spyOn(firebaseFirestore, "writeBatch");
-      await firebaseUtils.addCollectionAndDocuments(shopdata);
-      expect(getDocsSpy).toHaveBeenCalledTimes(1);
-      expect(writeBatchSpy).toHaveBeenCalledTimes(0);
-    });
-  });
-
   describe("onAuthStateChangedListener", () => {
     it("should call onAuthStateChanged and callback with user data", () => {
       const spy = vi.spyOn(firebaseAuth, "onAuthStateChanged");
