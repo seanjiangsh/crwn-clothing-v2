@@ -1,7 +1,8 @@
 import { memo } from "react";
+import LazyLoad from "react-lazyload";
+
 import { useDispatch } from "../../../redux/root-hook";
 import { cartActions } from "../../../redux/cart/reducer";
-
 import { Product } from "../../../types/common";
 
 import Button from "../../button/Button";
@@ -19,7 +20,9 @@ const ProductCard = memo((props: Product) => {
 
   return (
     <ProductCardContainer data-testid="product-card">
-      <img src={imageUrl} alt={name} />
+      <LazyLoad overflow once offset={100}>
+        <img src={imageUrl} alt={name} />
+      </LazyLoad>
       <Footer>
         <Name>{name} </Name>
         <Price>{price}</Price>

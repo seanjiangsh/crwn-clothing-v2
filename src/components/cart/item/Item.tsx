@@ -1,4 +1,6 @@
 import { FC, memo } from "react";
+import LazyLoad from "react-lazyload";
+
 import { Item as CartItem } from "../../../redux/cart/types";
 
 import { CartItemContainer, ItemDetails, ItemText } from "./Item.styles";
@@ -8,7 +10,9 @@ const Item: FC<CartItem> = memo((props) => {
 
   return (
     <CartItemContainer>
-      <img src={imageUrl} alt={name} />
+      <LazyLoad overflow once offset={100}>
+        <img src={imageUrl} alt={name} />
+      </LazyLoad>
       <ItemDetails>
         <ItemText>{name}</ItemText>
         <ItemText>{`${quantity} x ${price}`}</ItemText>

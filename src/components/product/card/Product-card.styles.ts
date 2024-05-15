@@ -7,11 +7,16 @@ export const ProductCardContainer = styled.div`
   height: 350px;
   align-items: center;
   position: relative;
-  img {
+  .lazyload-wrapper {
     width: 100%;
     height: 95%;
-    object-fit: cover;
     margin-bottom: 5px;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 3px;
   }
   button {
     width: 80%;
