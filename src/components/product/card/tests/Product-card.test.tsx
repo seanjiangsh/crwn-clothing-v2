@@ -15,15 +15,16 @@ describe("ProductCard component", () => {
 
   it("renders the product card correctly", () => {
     renderWithProviders(<ProductCard {...product} />);
-
-    const productImage = screen.getByAltText(product.name);
-    const productName = screen.getByText(product.name);
-    const productPrice = screen.getByText(product.price.toFixed(2));
+    const { name, price } = product;
+    const productCard = screen.getByTestId("product-card");
+    const lazyLoad = productCard.firstChild;
+    const productName = screen.getByText(name);
+    const productPrice = screen.getByText(price.toFixed(2));
     const addToCartButton = screen.getByRole("button", {
       name: /add to cart/i,
     });
 
-    expect(productImage).toBeInTheDocument();
+    expect(lazyLoad).toHaveClass("lazyload-wrapper");
     expect(productName).toBeInTheDocument();
     expect(productPrice).toBeInTheDocument();
     expect(addToCartButton).toBeInTheDocument();

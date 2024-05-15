@@ -180,10 +180,9 @@ describe("App component", () => {
         productCards.forEach((productCard, idx) => {
           const product = mockCategoryData.categories[0].items[idx];
           const title = screen.getByText(product.name);
-          const image = productCard.querySelector("img");
+          const lazyLoad = productCard.firstChild;
           expect(title).toBeInTheDocument();
-          expect(image).toBeInTheDocument();
-          expect(image?.src).toContain(product.imageUrl);
+          expect(lazyLoad).toHaveClass("lazyload-wrapper");
         });
       },
       { timeout: 5000 },
