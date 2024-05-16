@@ -15,6 +15,7 @@ export const BaseButton = styled.button`
   font-family: "Open Sans Condensed";
   font-weight: bolder;
   border: none;
+  border-radius: 3px;
   cursor: pointer;
   display: flex;
   justify-content: center;

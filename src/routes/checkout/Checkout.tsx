@@ -36,7 +36,7 @@ export default function Checkout() {
         return <Item key={item.id} {...item} />;
       })}
       <Total data-testid="checkout-total">{`Total: ${totalPrice}`}</Total>
-      <PaymentForm />
+      {items.length ? <PaymentForm /> : null}
     </CheckoutContainer>
   );
 }

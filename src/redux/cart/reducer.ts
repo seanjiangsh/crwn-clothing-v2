@@ -21,6 +21,9 @@ export const cartSlice = createSlice({
     clearCartItem(state, action: types.SetItemAction) {
       state.items = utils.clearItem(state.items, action.payload);
     },
+    clearCart(state) {
+      state.items = [];
+    },
   },
 });
 

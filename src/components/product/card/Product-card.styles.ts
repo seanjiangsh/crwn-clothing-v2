@@ -16,7 +16,7 @@ export const ProductCardContainer = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 3px;
+    border-radius: 4px;
   }
   button {
     width: 80%;
