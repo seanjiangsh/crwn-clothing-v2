@@ -13,7 +13,7 @@ describe("cart reducer", () => {
 
   it("should handle setCartOpened", () => {
     const initialState: types.CartState = { opened: false, items: [] };
-    const action = cartActions.setCartOpened();
+    const action = cartActions.setCartOpened(true);
     const { opened } = cartReducer(initialState, action);
     expect(opened).toBe(true);
   });
