@@ -8,7 +8,7 @@ export default function Icon() {
   const count = useSelector(selectCartCount);
   const dispatch = useDispatch();
 
-  const onClick = () => dispatch(cartActions.setCartOpened());
+  const onClick = () => dispatch(cartActions.setCartOpened(true));
 
   return (
     <CartIconContainer data-testid="cart-icon" onClick={onClick}>

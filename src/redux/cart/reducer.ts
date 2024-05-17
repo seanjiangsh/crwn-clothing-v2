@@ -9,8 +9,8 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    setCartOpened(state) {
-      state.opened = !state.opened;
+    setCartOpened(state, action: types.SetOpenedAction) {
+      state.opened = action.payload;
     },
     addCartItem(state, action: types.SetItemAction) {
       state.items = utils.addItem(state.items, action.payload);

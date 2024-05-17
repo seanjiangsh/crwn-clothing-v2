@@ -8,4 +8,5 @@ export type CartState = {
   readonly items: Array<Item>;
 };
 
+export type SetOpenedAction = PayloadAction<boolean>;
 export type SetItemAction = PayloadAction<Product>;
