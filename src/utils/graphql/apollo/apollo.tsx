@@ -1,11 +1,12 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const { DEV, VITE_NETLIFY_ENV } = import.meta.env;
+// console.log({ DEV, VITE_NETLIFY_ENV });
 const apolloOptions = {
-  uri: DEV
-    ? "http://localhost:3000/api/graphql"
-    : VITE_NETLIFY_ENV
-      ? "/.netlify/functions/graphql"
+  uri: VITE_NETLIFY_ENV
+    ? "/.netlify/functions/graphql"
+    : DEV
+      ? "http://localhost:3000/api/graphql"
       : "/api/graphql",
   cache: new InMemoryCache(),
 };

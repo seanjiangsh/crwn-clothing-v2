@@ -45,8 +45,4 @@ export const OutletContainer = styled.div`
   @media screen and (max-width: 800px) {
     width: 100%;
   }
-  @media screen and (min-width: 400px) {
-    display: flex;
-    align-items: center;
-  }
 `;

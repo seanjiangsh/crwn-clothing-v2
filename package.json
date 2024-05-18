@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "sls": "npm run dev --prefix aws",
-    "dev-sls": "concurrently \"npm run sls\" \"npm run gql-codegen\" \"npm run dev\"",
-    "netlify": "netlify dev",
+    "dev:sls": "concurrently \"npm run sls\" \"npm run gql-codegen\" \"npm run dev\"",
+    "dev:netlify": "cross-env VITE_NETLIFY_ENV=true netlify dev",
     "gql-codegen": "wait-on http://localhost:3000/api/health && graphql-codegen -c graphql/codegen.ts -w",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -58,6 +58,7 @@
     "@vitest/coverage-istanbul": "^1.3.1",
     "apollo-server-lambda": "^3.13.0",
     "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
     "eslint": "8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",

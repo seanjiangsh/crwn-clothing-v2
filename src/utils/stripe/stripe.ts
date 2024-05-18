@@ -12,10 +12,10 @@ const STRIPE_PUBLISHABLE_KEY =
   "pk_test_51HPd44DGvQwgB8HFNHHN6yuoOWTkbQR8h6TDgRgB4AzLdl199vNOyY7jdL9en9jHHZk5WVNnuJwWlV3ZhU3R30O100v8MupaEG";
 export const loadStripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
-const createPaymentIntentUrl = DEV
-  ? "http://localhost:3000/api/create-payment-intent"
-  : VITE_NETLIFY_ENV
-    ? "/.netlify/functions/create-payment-intent"
+const createPaymentIntentUrl = VITE_NETLIFY_ENV
+  ? "/.netlify/functions/create-payment-intent"
+  : DEV
+    ? "http://localhost:3000/api/create-payment-intent"
     : "/api/create-payment-intent";
 
 type PaymentArgs = {
