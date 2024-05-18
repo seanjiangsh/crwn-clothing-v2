@@ -15,8 +15,9 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   border: 1px solid black;
+  border-radius: 3px;
   background-color: white;
   opacity: 0.7;
   position: absolute;
@@ -30,6 +31,8 @@ export const Body = styled.div`
   p {
     font-weight: lighter;
     font-size: 16px;
+    margin: 0;
+    padding-bottom: 5px;
   }
 `;
 
@@ -41,7 +44,10 @@ export const DirectoryItemContainer = styled.div`
   flex: 1 1 auto;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.5),
+    0 6px 20px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
   margin: 10px;
   overflow: hidden;
   &:hover {

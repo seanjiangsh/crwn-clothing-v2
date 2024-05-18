@@ -14,6 +14,7 @@ export const Title = styled.h2`
   margin-bottom: 25px;
   cursor: pointer;
   padding: 20px;
+  width: fit-content;
   @media screen and (max-width: 800px) {
     padding: 0;
   }
