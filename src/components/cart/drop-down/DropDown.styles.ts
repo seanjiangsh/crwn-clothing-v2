@@ -9,13 +9,15 @@ export const CartDropdownContainer = styled.div`
   position: absolute;
   width: 240px;
   height: 340px;
+  max-height: 60dvh;
   display: flex;
   flex-direction: column;
   padding: 20px;
   border: 1px solid black;
+  border-radius: 4px;
   background-color: white;
-  top: 90px;
-  right: 40px;
+  top: 60px;
+  right: 10px;
   z-index: 5;
   ${BaseButton},
   ${GoogleButton},
@@ -29,6 +31,7 @@ export const CartItems = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
+  margin-bottom: 10px;
 `;
 
 export const EmptyMessage = styled.span`

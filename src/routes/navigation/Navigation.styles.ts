@@ -42,7 +42,4 @@ export const OutletContainer = styled.div`
   height: calc(100dvh - 60px);
   overflow: auto;
   width: 100%;
-  @media screen and (max-width: 800px) {
-    width: 100%;
-  }
 `;
