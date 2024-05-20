@@ -26,7 +26,7 @@ jobs:
       - name: Build frontend code
         run: npm run build
 
-      - name: Install serverless dependencies
+      - name: Install AWS deployment dependencies
         run: npm run install-sls
 
       - name: Deploy to AWS
