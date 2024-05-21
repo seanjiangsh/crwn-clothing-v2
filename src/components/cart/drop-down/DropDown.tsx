@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 
 import { useSelector, useDispatch } from "../../../redux/root-hook";
-import { selectCartItems } from "../../../redux/cart/selectors";
+import {
+  selectCartItems,
+  selectCartOpened,
+} from "../../../redux/cart/selectors";
 import { cartActions } from "../../../redux/cart/reducer";
 
 import Button from "../../button/Button";
@@ -18,6 +21,7 @@ export default function DropDown() {
   const items = useSelector(selectCartItems);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const cartOpened = useSelector(selectCartOpened);
 
   const goToCheckout = useCallback(() => {
     navigate("/checkout");
@@ -25,8 +29,11 @@ export default function DropDown() {
   }, [navigate, dispatch]);
 
   const onClickAway = useCallback(() => {
-    dispatch(cartActions.setCartOpened(false));
-  }, [dispatch]);
+    setTimeout(() => {
+      if (!cartOpened) return;
+      dispatch(cartActions.setCartOpened(false));
+    }, 100);
+  }, [cartOpened, dispatch]);
 
   return (
     <ClickAwayListener onClickAway={onClickAway}>

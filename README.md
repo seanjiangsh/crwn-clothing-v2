@@ -20,9 +20,12 @@ A React project focused on practicing E-commerce functionalities, based on [ZTM-
 ```bash
 # install dependencies
 npm install && npm run install-sls
+
+# start dev server at http://localhost:5173
+npm run dev:sls
 ```
 
-## Available scripts
+### Available scripts
 
 | Script              | Description                                                                                      |
 | ------------------- | ------------------------------------------------------------------------------------------------ |
