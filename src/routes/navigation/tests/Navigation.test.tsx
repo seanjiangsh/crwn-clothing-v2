@@ -1,5 +1,5 @@
 import { vi } from "vitest";
-import { screen } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { User } from "firebase/auth";
 import { MemoryRouter } from "react-router-dom";
@@ -70,6 +70,41 @@ describe("Navigation component", () => {
     await user.click(cartIcon);
     const cartDropdown = screen.getByTestId("cart-drop-down");
     expect(cartDropdown).toBeInTheDocument();
+  });
+
+  it("does not open CartDropDown when is's already opened", async () => {
+    const preloadedState = {
+      cart: { opened: true, items: [] },
+    };
+    const { store } = renderWithProviders(
+      <MemoryRouter initialEntries={["/"]}>
+        <Navigation />
+      </MemoryRouter>,
+      { preloadedState },
+    );
+    const cartIcon = screen.getByTestId("cart-icon");
+    await user.click(cartIcon);
+    const state = store.getState();
+    expect(state.cart.opened).toBe(true);
+  });
+
+  it("close the CartDropDown on clicking away", async () => {
+    const preloadedState = {
+      cart: { opened: true, items: [] },
+    };
+    const { container, store } = renderWithProviders(
+      <MemoryRouter initialEntries={["/"]}>
+        <Navigation />
+      </MemoryRouter>,
+      { preloadedState },
+    );
+    await user.click(container);
+    await waitFor(() => {
+      const cartDropDown = screen.queryByTestId("cart-drop-down");
+      expect(cartDropDown).not.toBeInTheDocument();
+      const state = store.getState();
+      expect(state.cart.opened).toBe(false);
+    });
   });
 
   it("calls the signOut function when sign out link is clicked", async () => {
