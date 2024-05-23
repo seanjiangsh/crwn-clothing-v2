@@ -2,9 +2,11 @@
 
 A React project focused on practicing E-commerce functionalities, based on [ZTM-Complete React Developer](https://zerotomastery.io/courses/learn-react/) course.
 
+This project goes beyond the course, featuring a complete build with TypeScript and Vite, and leveraging AWS Lambda functions to create a full-stack website. It employs a CI/CD pipeline with Infrastructure as Code (IaC) to automate the deployment process.
+
 ---
 
-[![cov](https://seanjiangsh.github.io/ztm-crwn-clothing-v2/badges/coverage.svg)](https://github.com/seanjiangsh/ztm-crwn-clothing-v2/actions)
+[![cov](https://raw.githubusercontent.com/seanjiangsh/crwn-clothing-v2/gh-pages/badges/coverage.svg)](https://github.com/seanjiangsh/ztm-crwn-clothing-v2/actions)
 [![Test workflow](https://github.com/seanjiangsh/ztm-crwn-clothing-v2/actions/workflows/test.yml/badge.svg)](https://github.com/seanjiangsh/ztm-crwn-clothing-v2/actions/workflows/test.yml)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ad156783-6720-458c-8809-c47183cb90fe/deploy-status)](https://app.netlify.com/sites/sean-jiang-ztm-crwn-clothing-v2/deploys)
 [![Deploy to AWS](https://github.com/seanjiangsh/ztm-crwn-clothing-v2/actions/workflows/deploy.yml/badge.svg)](https://github.com/seanjiangsh/ztm-crwn-clothing-v2/actions/workflows/deploy.yml)
