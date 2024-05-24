@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { Dialog, DialogTitle, DialogContent } from "@mui/material";
 
 import { useSelector } from "../../redux/root-hook";
 import { useDispatch } from "../../redux/root-hook";
@@ -24,6 +25,13 @@ export default function PaymentForm() {
   const totalPrice = useSelector(selectCartTotalPrice);
 
   const [isProcessing, setIsProcessing] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const dialogTitle = paymentSuccess ? "Payment successful" : "Payment failed";
+  const dialogMsg = paymentSuccess
+    ? "Thank you for using crwn-clothing app!"
+    : "Payment failed, please try again!";
 
   const onPayment: React.FormEventHandler<HTMLFormElement> = async (ev) => {
     ev.preventDefault();
@@ -34,10 +42,14 @@ export default function PaymentForm() {
     setIsProcessing(true);
     const args = { totalPrice, user, stripe, card };
     const result = await createCardPayment(args);
-    const msg = result ? "Payment successful" : "Payment failed";
-    alert(msg);
+    setPaymentSuccess(result);
+    setDialogOpen(true);
     setIsProcessing(false);
-    if (result) dispatch(cartActions.clearCart());
+  };
+
+  const closeDialog = () => {
+    setDialogOpen(false);
+    if (paymentSuccess) dispatch(cartActions.clearCart());
   };
 
   return (
@@ -53,6 +65,12 @@ export default function PaymentForm() {
           <p>4242 4242 4242 4242 - (future date) - 242 - 42424</p>
         </TestDescription>
       </FormContainer>
+      <Dialog fullWidth open={dialogOpen} onClose={closeDialog}>
+        <DialogTitle sx={{ m: 0, p: 2 }}>{dialogTitle}</DialogTitle>
+        <DialogContent dividers sx={{ p: 5, pl: 2 }}>
+          {dialogMsg}
+        </DialogContent>
+      </Dialog>
     </PaymentFormContainer>
   );
 }

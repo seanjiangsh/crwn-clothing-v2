@@ -6,8 +6,9 @@ region ap-northeast-1
 runtime typescript
 
 @static
-spa true
 folder ../dist
+spa true
+prune true
 
 @http
 /api/*
