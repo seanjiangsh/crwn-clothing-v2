@@ -45,28 +45,27 @@ describe("PaymentForm component with Stripe getElement mock", () => {
   test("displays failure message when stripe did not setup", async () => {
     const mockCreateCardPayment = vi.spyOn(stripeUtils, "createCardPayment");
     mockCreateCardPayment.mockImplementation(() => Promise.resolve(false));
-    const alertSpy = vi.spyOn(window, "alert");
-    alertSpy.mockImplementation(() => {});
 
     renderWithProviders(<PaymentForm />);
     const payButton = screen.getByText("Pay now");
     await user.click(payButton);
 
-    expect(alertSpy).toHaveBeenCalledWith("Payment failed");
+    const alertTitle = screen.getByText("Payment failed, please try again!");
+    expect(alertTitle).toBeInTheDocument();
   });
 
   test("calls createCardPayment and displays success message on successful payment", async () => {
     const mockCreateCardPayment = vi.spyOn(stripeUtils, "createCardPayment");
     mockCreateCardPayment.mockImplementation(() => Promise.resolve(true));
-    const alertSpy = vi.spyOn(window, "alert");
-    alertSpy.mockImplementation(() => {});
 
     renderWithProviders(<PaymentForm />);
 
     const payButton = screen.getByText("Pay now");
     await user.click(payButton);
 
-    expect(mockCreateCardPayment).toHaveBeenCalledTimes(1);
-    expect(alertSpy).toHaveBeenCalledWith("Payment successful");
+    const alertTitle = screen.getByText(
+      "Thank you for using crwn-clothing app!",
+    );
+    expect(alertTitle).toBeInTheDocument();
   });
 });

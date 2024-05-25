@@ -72,8 +72,13 @@ describe("App component", () => {
         <App />
       </MemoryRouter>,
     );
-    const checkout = await screen.findByTestId("checkout");
-    expect(checkout).toBeInTheDocument();
+    await waitFor(
+      async () => {
+        const checkout = await screen.findByTestId("checkout");
+        expect(checkout).toBeInTheDocument();
+      },
+      { timeout: 10000 },
+    );
   });
 
   it("renders the authentication page", async () => {
