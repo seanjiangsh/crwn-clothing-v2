@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Dialog, DialogTitle, DialogContent } from "@mui/material";
 
-import { useSelector } from "../../redux/root-hook";
-import { useDispatch } from "../../redux/root-hook";
+import { useDispatch, useSelector } from "../../redux/root-hook";
 import { selectUser } from "../../redux/user/selectors";
 import { selectCartTotalPrice } from "../../redux/cart/selectors";
 import { cartActions } from "../../redux/cart/reducer";
