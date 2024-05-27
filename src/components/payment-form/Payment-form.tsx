@@ -64,7 +64,12 @@ export default function PaymentForm() {
           <p>4242 4242 4242 4242 - (future date) - 242 - 42424</p>
         </TestDescription>
       </FormContainer>
-      <Dialog fullWidth open={dialogOpen} onClose={closeDialog}>
+      <Dialog
+        fullWidth
+        data-testid="payment-dialog"
+        open={dialogOpen}
+        onClose={closeDialog}
+      >
         <DialogTitle sx={{ m: 0, p: 2 }}>{dialogTitle}</DialogTitle>
         <DialogContent dividers sx={{ p: 5, pl: 2 }}>
           {dialogMsg}

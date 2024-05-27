@@ -25,6 +25,7 @@ export default function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
       if (user) createUserDocumentFromAuth(user);
+      console.log("App user state changed", user);
       dispatch(userActions.setCurrentUser(user));
     });
 

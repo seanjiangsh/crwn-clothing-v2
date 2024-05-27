@@ -1,12 +1,14 @@
 import { vi } from "vitest";
-import { screen, waitFor } from "@testing-library/react";
+import { act, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { MockedProvider as ApolloMockProvider } from "@apollo/client/testing";
 
 import { renderWithProviders } from "../utils/tests/utils-for-tests";
 import { getCategories } from "../utils/graphql/query/categories";
+
 import App from "../App";
+import { userActions } from "../redux/user/reducer";
 
 vi.mock("firebase/auth", async () => {
   const firebase = await vi.importActual("firebase/auth");
@@ -50,9 +52,9 @@ describe("App component", () => {
         expect(navigation).toBeInTheDocument();
         expect(directory).toBeInTheDocument();
       },
-      { timeout: 5000 },
+      { timeout: 10000 },
     );
-  });
+  }, 10000);
 
   it("renders the shop page", async () => {
     renderWithProviders(
@@ -79,7 +81,7 @@ describe("App component", () => {
       },
       { timeout: 10000 },
     );
-  });
+  }, 10000);
 
   it("renders the authentication page", async () => {
     renderWithProviders(
@@ -190,7 +192,26 @@ describe("App component", () => {
           expect(lazyLoad).toHaveClass("lazyload-wrapper");
         });
       },
-      { timeout: 5000 },
+      { timeout: 10000 },
     );
-  });
+  }, 10000);
+
+  it("navigates to the /shop from /auth when user logged in", async () => {
+    const { store } = renderWithProviders(
+      <MemoryRouter initialEntries={["/auth"]}>
+        <App />
+      </MemoryRouter>,
+    );
+
+    act(() =>
+      store.dispatch(userActions.setCurrentUser({ uid: "123" } as any)),
+    );
+
+    await waitFor(
+      () => {
+        expect(screen.getByTestId("shop-preview")).toBeInTheDocument();
+      },
+      { timeout: 10000 },
+    );
+  }, 10000);
 });

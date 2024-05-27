@@ -54,11 +54,11 @@ describe("PaymentForm component with Stripe getElement mock", () => {
     expect(alertTitle).toBeInTheDocument();
   });
 
-  test("calls createCardPayment and displays success message on successful payment", async () => {
+  test("cart cleared after successful payment and dialog closing", async () => {
     const mockCreateCardPayment = vi.spyOn(stripeUtils, "createCardPayment");
     mockCreateCardPayment.mockImplementation(() => Promise.resolve(true));
 
-    renderWithProviders(<PaymentForm />);
+    const { store } = renderWithProviders(<PaymentForm />);
 
     const payButton = screen.getByText("Pay now");
     await user.click(payButton);
@@ -67,5 +67,11 @@ describe("PaymentForm component with Stripe getElement mock", () => {
       "Thank you for using crwn-clothing app!",
     );
     expect(alertTitle).toBeInTheDocument();
+
+    const backdrop = document.querySelector(".MuiModal-backdrop");
+    expect(backdrop).toBeInTheDocument();
+
+    await user.click(backdrop!);
+    expect(store.getState().cart.items).toHaveLength(0);
   });
 });

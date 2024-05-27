@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "../../redux/root-hook";
 import { selectUser } from "../../redux/user/selectors";
@@ -8,12 +9,14 @@ import SignUp from "./sign-up/Sign-up";
 import { AuthenticationContainer } from "./Authentication.styles";
 
 export default function Authentication() {
-  const user = useSelector(selectUser);
+  const navigate = useNavigate();
 
+  const user = useSelector(selectUser);
   // * redirect to shop if user is already signed in
   useEffect(() => {
-    if (user) window.location.href = "/shop";
-  }, [user]);
+    console.log("auth", user);
+    if (user) navigate("/shop");
+  }, [navigate, user]);
 
   return (
     <AuthenticationContainer data-testid="authentication">
